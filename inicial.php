@@ -38,9 +38,8 @@
 </head>
 
 <body>
-    <!-- Cabeçalho do site -->
-    <header>
-        <nav class="navbarInicio">
+    <!-- Conteúdo principal do site -->
+    <main class=main-container>
             <div class="usuarioDiv">
                 <div class="cards-container">
                     <div class="profile-card">
@@ -65,36 +64,67 @@
                             
                         </div>
                     </div>
-                    <div class="profile-card menu-card">
-                        <div class="menu-options">
-                            <div class="profile-title">Menu</div>
-                            <hr>
-                            <a href="producao.php">Produção</a>
-                            <hr>
-                            <a href="funcionarios.php">Funcionários</a>
-                            <hr>
-                            <a href="partidas.php">Partidas</a>
-                            <hr>
-                            <a href="index.php">Relatórios</a>
+                    <?php
+                        echo "
+                            <div class='profile-card menu-card'>
+                            <div class='menu-options'>
+                                <div class='profile-title'>Menu</div>
+                                <hr>
+                                <a href='inicial.php'>Produção</a>
+                                <hr>
+                                <a href='inicial.php?funcionario'>Funcionários</a>
+                                <hr>
+                                <a href='inicial.php?partida'>Partidas</a>
+                                <hr>
+                                <a href='inicial.php?relatorio'>Relatórios</a>
+                            </div>
                         </div>
-                    </div>
+                        ";
+                    ?>
                     <div class="profile-card sobre-card">
                         <div class="sobre-options">
-                            <details>
-                                <summary>Sobre</summary>
+                            <div class="profile-title"><b>ⓘ</b> Sobre</div>
+                                <hr>
                                 <p>Dashboard da sua produção com indicativos gráficos, mostrando dados da sua produção, trabalhadores, retrabalho, defeitos e produção.</p>
-                            </details>
+                            </div>
                         </div>
                     </div>
+                    <img src="img/logo.svg" class='logo' alt="Logo">
+                    <div class="info">
+                        <h1>DashBoard</h1>
+                        <?php 
+                            if (isset($_GET['funcionario'])) {
+                                echo "<p class='profile-title'>Funcionários</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                            } elseif (isset($_GET['partida'])) {
+                                echo "<p class='profile-title'>Partida</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                            } elseif (isset($_GET['relatorio'])) {
+                                echo "<p class='profile-title'>Relatório</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                            } else {
+                                echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                            }
+                        ?>            
+                        <?php
+                        echo "<div class='card'>";
+                        echo "<div class='tool'>";
+                            echo "<div class='circle'>";
+                            echo "<span class='red box'></span>";
+                            echo "</div>";
+                            echo "<div class='circle'>";
+                            echo "<span class='yellow box'></span>";
+                            echo "</div>";
+                            echo "<div class='circle'>";
+                            echo "<span class='green box'></span>";
+                            echo "</div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                        echo "</div>";
+                        echo "</div>";
+                        ?>  
+                    </div>
+                    
                 </div>
             </div>
-
-
-            <div class="logoDiv">
-                <img src="img/logo.svg" alt="Logo da empresa" class="lixo">
-            </div>
-        </nav>
-    </header>
+    </main>
 </body>
 
 </html>

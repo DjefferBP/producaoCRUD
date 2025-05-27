@@ -60,19 +60,20 @@
                             <div class="nomeEDisplay">
                                 <div class="profile-title">Usuário</div>
                                 <p class="profile-name"><?php echo isset($nomes[$id])?$nomes[$id]:"Usuário não identificado"; ?></p>
+                                <button class="btn-danger sair">Sair</button>
                             </div>
-                            <button class="btn-danger sair">Sair</button>
+                            
                         </div>
                     </div>
                     <div class="profile-card menu-card">
                         <div class="menu-options">
                             <div class="profile-title">Menu</div>
                             <hr>
-                            <a href="index.php">Home</a>
+                            <a href="producao.php">Produção</a>
                             <hr>
-                            <a href="index.php">Produção</a>
+                            <a href="funcionarios.php">Funcionários</a>
                             <hr>
-                            <a href="index.php">Estoque</a>
+                            <a href="partidas.php">Partidas</a>
                             <hr>
                             <a href="index.php">Relatórios</a>
                         </div>

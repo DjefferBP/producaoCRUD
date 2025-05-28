@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <!-- Conteúdo principal do site -->
+    <!-- Sidebar do site -->
     <main class=main-container>
             <div class="usuarioDiv">
                 <div class="cards-container">
@@ -89,6 +89,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Conteúdo principal do site -->
                     <img src="img/logo.svg" class='logo' alt="Logo">
                     <div class="info">
                         <h1>DashBoard</h1>

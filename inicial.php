@@ -1,20 +1,37 @@
 <?php
-    //Inicia a sessão e verifica se o usuário está logado
-    // Caso não esteja, redireciona para a página de login
     session_start();
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
+    $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
+    $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
     if (!isset($_SESSION['nomes'])) {
-        $emails = json_decode(file_get_contents("jsons/email.json"), true);
-        $senhas = json_decode(file_get_contents("jsons/senha.json"), true);
-        $fotos = json_decode(file_get_contents("jsons/foto.json"), true);
-        $nomes = json_decode(file_get_contents("jsons/nome.json"), true);
-        $id = array_search($_SESSION['usuario'], $emails);
-        $_SESSION['nomes'] = $nomes;
-        $_SESSION['emails'] = $emails;
-        $_SESSION['senhas'] = $senhas;
-        $_SESSION['fotos'] = $fotos;
+        if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
+            $email = json_decode(file_get_contents("jsons/emailadm.json"), true);
+            $senha = json_decode(file_get_contents("jsons/senhaadm.json"), true);
+            $foto = json_decode(file_get_contents("jsons/fotoadm.json"), true);
+            $nome = json_decode(file_get_contents("jsons/nomeadm.json"), true);
+            $id = array_search($_SESSION['usuario'], $email); 
+            $_SESSION['nomes'] = $nome;
+            $_SESSION['emails'] = $email;
+            $_SESSION['senhas'] = $senha;
+            $_SESSION['fotos'] = $foto;
+            $nomes = $nome;
+            $emails = $email;
+            $senhas = $senha;
+            $fotos = $foto;
+        }
+        else {
+            $emails = json_decode(file_get_contents("jsons/email.json"), true);
+            $senhas = json_decode(file_get_contents("jsons/senha.json"), true);
+            $fotos = json_decode(file_get_contents("jsons/foto.json"), true);
+            $nomes = json_decode(file_get_contents("jsons/nome.json"), true);
+            $id = array_search($_SESSION['usuario'], $emails);
+            $_SESSION['nomes'] = $nomes;
+            $_SESSION['emails'] = $emails;
+            $_SESSION['senhas'] = $senhas;
+            $_SESSION['fotos'] = $fotos;
+        }
     } else {
         $emails = $_SESSION['emails'];
         $id = array_search($_SESSION['usuario'], $emails);
@@ -39,92 +56,181 @@
 
 <body>
     <!-- Sidebar do site -->
+    <!-- Verificando se é o Adm ou o trabalhado r que está logado -->
     <main class=main-container>
-            <div class="usuarioDiv">
-                <div class="cards-container">
-                    <div class="profile-card">
-                        <p>Bem vindo!</p>
-                        <div class="profile-info">
-                            <div class="profile-image profile-image-placeholder">
-                                <img 
-                                    <?php 
-                                        if ($id !== false && isset($fotos[$id])) {
-                                            echo "src='usuarios/$fotos[$id]'";
-                                        } else {
-                                            echo "src='img/default.png'";
-                                        }
-                                    ?> 
-                                    alt="Imagem do usuário">
-                            </div>
-                            <div class="nomeEDisplay">
-                                <div class="profile-title">Usuário</div>
-                                <p class="profile-name"><?php echo isset($nomes[$id])?$nomes[$id]:"Usuário não identificado"; ?></p>
-                                <button class="btn-danger sair">Sair</button>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <?php
-                        echo "
-                            <div class='profile-card menu-card'>
-                            <div class='menu-options'>
-                                <div class='profile-title'>Menu</div>
-                                <hr>
-                                <a href='inicial.php'>Produção</a>
-                                <hr>
-                                <a href='inicial.php?funcionario'>Funcionários</a>
-                                <hr>
-                                <a href='inicial.php?partida'>Partidas</a>
-                                <hr>
-                                <a href='inicial.php?relatorio'>Relatórios</a>
+        <?php
+            if ($_SESSION['usuario'] == $emailAdm[0]){        
+                echo '
+                <div class="usuarioDiv">
+                    <div class="cards-container">
+                        <div class="profile-card">
+                            <p>Bem vindo!</p>
+                            <div class="profile-info">
+                                <div class="profile-image profile-image-placeholder">
+                                    <img ';
+
+                if ($id !== false && isset($fotos[$id])) {
+                    echo "src='usuarios/" . $fotos[$id] . "'";
+                }
+                 else {
+                    echo "src='img/default.png'";
+                }
+
+                echo ' alt="Imagem do usuário">
+                                </div>
+                                <div class="nomeEDisplay">
+                                    <div class="profile-title">Usuário</div>
+                                    <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
+                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                </div>
                             </div>
                         </div>
-                        ";
-                    ?>
-                    <div class="profile-card sobre-card">
-                        <div class="sobre-options">
-                            <div class="profile-title"><b>ⓘ</b> Sobre</div>
+
+                        <div class="profile-card menu-card">
+                            <div class="menu-options">
+                                <div class="profile-title">Menu</div>
+                                <hr>
+                                <a href="inicial.php">Produção</a>
+                                <hr>
+                                <a href="inicial.php?funcionario">Funcionários</a>
+                                <hr>
+                                <a href="inicial.php?partida">Partidas</a>
+                                <hr>
+                                <a href="inicial.php?relatorio">Relatórios</a>
+                            </div>
+                        </div>
+
+                        <div class="profile-card sobre-card">
+                            <div class="sobre-options">
+                                <div class="profile-title"><b>ⓘ</b> Sobre</div>
                                 <hr>
                                 <p>Dashboard da sua produção com indicativos gráficos, mostrando dados da sua produção, trabalhadores, retrabalho, defeitos e produção.</p>
                             </div>
                         </div>
+
+                        <!-- Conteúdo principal do site -->
+                        <div class="info">
+                            <h1>DashBoard</h1>
+                ';
+
+                if (isset($_GET['funcionario'])) {
+                    echo "<p class='profile-title'>Funcionários</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                <h2 class='card_title'>Funcionários</h2>
+                            </div>
+                        </div>";
+                } elseif (isset($_GET['partida'])) {
+                    echo "<p class='profile-title'>Partida</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                <h2 class='card_title'>Partidas</h2>
+                            </div>
+                        </div>";
+                } elseif (isset($_GET['relatorio'])) {
+                    echo "<p class='profile-title'>Relatório</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                <h2 class='card_title'>Relatórios</h2>
+                            </div>
+                        </div>";
+                } else {
+                    echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                <h2 class='card_title'>Produção</h2>
+                            </div>
+                        </div>";
+                }
+
+                echo '
+                        </div>
+
+                        <a href="inicial.php">
+                            <img src="img/logo.svg" class="logo" alt="Logo da empresa, letras PG estilizadas em azul, fundo branco, transmite sensação de modernidade">
+                        </a>   
                     </div>
-                    <!-- Conteúdo principal do site -->
-                    <img src="img/logo.svg" class='logo' alt="Logo">
-                    <div class="info">
-                        <h1>DashBoard</h1>
-                        <?php 
-                            if (isset($_GET['funcionario'])) {
-                                echo "<p class='profile-title'>Funcionários</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
-                            } elseif (isset($_GET['partida'])) {
-                                echo "<p class='profile-title'>Partida</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
-                            } elseif (isset($_GET['relatorio'])) {
-                                echo "<p class='profile-title'>Relatório</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
-                            } else {
-                                echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
-                            }
-                        ?>            
-                        <?php
-                        echo "<div class='card'>";
-                        echo "<div class='tool'>";
-                            echo "<div class='circle'>";
-                            echo "<span class='red box'></span>";
-                            echo "</div>";
-                            echo "<div class='circle'>";
-                            echo "<span class='yellow box'></span>";
-                            echo "</div>";
-                            echo "<div class='circle'>";
-                            echo "<span class='green box'></span>";
-                            echo "</div>";
-                        echo "</div>";
-                        echo "<div class='card__content'>";
-                        echo "</div>";
-                        echo "</div>";
-                        ?>  
-                    </div>
-                    
                 </div>
-            </div>
+                ';
+
+            }
+            else {
+                echo '
+                <div class="usuarioDiv">
+                    <div class="cards-container">
+                        <div class="profile-card">
+                            <p>Bem vindo!</p>
+                            <div class="profile-info">
+                                <div class="profile-image profile-image-placeholder">
+                                    <img ';
+
+                if ($id !== false && isset($fotos[$id])) {
+                    echo "src='usuarios/" . $fotos[$id] . "'";
+                } else {
+                    echo "src='img/default.png'";
+                }
+
+                echo ' alt="Imagem do usuário">
+                                </div>
+                                <div class="nomeEDisplay">
+                                    <div class="profile-title">Usuário</div>
+                                    <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
+                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-card menu-card">
+                            <div class="menu-options">
+                                <div class="profile-title">Menu</div>
+                                <hr>
+                                <a href="inicial.php">Produção</a>
+                                <hr>
+                                <a href="inicial.php?diaria">Registro Diário</a>
+                            </div>
+                        </div>
+
+                        <div class="profile-card sobre-card">
+                            <div class="sobre-options">
+                                <div class="profile-title"><b>ⓘ</b> Sobre</div>
+                                <hr>
+                                <p>Dashboard da sua produção com indicativos gráficos, mostrando dados da sua produção, trabalhadores, retrabalho, defeitos e produção.</p>
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo principal do site -->
+                        <div class="info">
+                            <h1>DashBoard</h1>
+                ';
+
+                if (isset($_GET['diaria'])) {
+                    echo "<p class='profile-title'>Registro Diário</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                
+                            </div>
+                        </div>";
+                } else {
+                    echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<div class='card'>
+                            <div class='card_content'>
+                                <h2 class='card_title'>Produção</h2>
+                            </div>
+                        </div>";
+                }
+
+                echo '
+                        </div>
+
+                        <a href="inicial.php">
+                            <img src="img/logo.svg" class="logo" alt="Logo da empresa, letras PG estilizadas em azul, fundo branco, transmite sensação de modernidade">
+                        </a>   
+                    </div>
+                </div>
+                ';
+
+            }
+        ?>
     </main>
 </body>
 

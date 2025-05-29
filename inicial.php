@@ -5,6 +5,14 @@
     }
     $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
+    if (!isset($_SESSION['quantidades'])) $_SESSION['quantidades'] = [];
+    if (!isset($_SESSION['prejuizos'])) $_SESSION['prejuizos'] = [];
+    if (!isset($_SESSION['cargas'])) $_SESSION['cargas'] = [];
+    if (!isset($_SESSION['datasRegistros'])) $_SESSION['datasRegistros'] = [];
+    if (!isset($_SESSION['horasRegistros'])) $_SESSION['horasRegistros'] = [];
+    if (!isset($_SESSION['diasSemanas'])) $_SESSION['diasSemanas'] = [];
+    if (!isset($_SESSION['carasTrabalhos'])) $_SESSION['carasTrabalhos'] = [];
+    if (!isset($_SESSION['horas'])) $_SESSION['horas'] = [];
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
             $email = json_decode(file_get_contents("jsons/emailadm.json"), true);
@@ -59,7 +67,7 @@
     <!-- Verificando se é o Adm ou o trabalhado r que está logado -->
     <main class=main-container>
         <?php
-            if ($_SESSION['usuario'] == $emailAdm[0]){        
+            if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){        
                 echo '
                 <div class="usuarioDiv">
                     <div class="cards-container">
@@ -207,18 +215,56 @@
                     echo "<p class='profile-title'>Registro Diário</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                
+                                <h2 class='profile-title' style='font-size: 28px;'>Registro</h2>
+                                <div class='profile-forms'>
+                                     <form method='POST' action='receber-dados.php'>
+                                        <div class='mb-3'>
+                                            <label for='exampleInputEmail1' class='form-label'>Quantidade Produzida</label>
+                                            <input type='number' name='quantidade' min='0' class='form-control' id='seunumero' aria-describedby='numero' required>
+                                            <div id='seunumero' class='form-text'>Insira a quantidade de sapatos produzido por você hoje</div>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <label for='preju' class='form-label'>Quantidade de prejuízo</label>
+                                            <input type='number' name='prejuizo' class='form-control' min='0' id='prejuizo' required>
+                                            <div id='prejuizo' class='form-text'>Insira a quantidade de sapatos perdidos hoje</div>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <label for='horaria' class='form-label'>Sua carga horária de hoje</label>
+                                            <input required type='number' name='carga' min='0' class='form-control' id='carga'>
+                                            <div id='carga' class='form-text'>Sua carga horária em minutos. Ex: 2 horas = 120 min</div>
+                                        </div>
+                                        <button type='submit' class='btn btn-primary'>Submit</button>
+                                        </form>
+                                </div>
                             </div>
                         </div>";
                 } else {
                     echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>
-                            </div>
-                        </div>";
+                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>";
+                                echo "<form method='post' action='inicial.php'";
+                                     echo "<span>Escolha a data inicial </span>";
+                                    echo "<select class='form-select' name='datai' required>";
+                                        $totalDatas = count($_SESSION['datasRegistros']);
+                                        $datasUnicas = array_unique($_SESSION['datasRegistros']);
+                                        for($i = 0; $i < $totalDatas; $i++){
+                                            echo "<option value='data$i'>$datasUnicas[$i]</option>";
+                                        }
+                                    echo "</select>";
+                                    echo "<span>Escolha a data final</span>";
+                                    echo "<select class='form-select' name='dataf' required>";
+                                        $totalDatas = count($_SESSION['datasRegistros']);
+                                        $datasUnicas = array_unique($_SESSION['datasRegistros']);
+                                        for($i = 0; $i < $totalDatas; $i++){
+                                            echo "<option value='data$i'>$datasUnicas[$i]</option>";
+                                        }
+                                    echo "</select>";
+                                    echo "<input class='btn btn-primary' type='submit' value='FILTRAR'/>";
+                                echo "</form>";
+                            echo "</div>";
+                        echo "</div>";         
                 }
-
                 echo '
                         </div>
 

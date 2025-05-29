@@ -15,9 +15,9 @@
           <input type="email" placeholder="Digite o E-mail" required name="email">
       </div>
       <div class="input-container">
-          <input type="password" placeholder="Digite a senha" required name="senha">
-        </div>
-         <input type="submit" value="Entrar" class="submit">
+          <input type="password" placeholder="Digite a senha" required name="senha" id="pwd">
+      </div>
+      <input type="submit" value="Entrar" class="submit">
    </form>
 
 </body>

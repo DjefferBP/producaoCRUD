@@ -138,7 +138,7 @@
                     echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='card_title'>Produção</h2>
+                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>
                             </div>
                         </div>";
                 }
@@ -214,7 +214,7 @@
                     echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='card_title'>Produção</h2>
+                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>
                             </div>
                         </div>";
                 }

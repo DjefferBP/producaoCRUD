@@ -31,7 +31,7 @@
         array_push($_SESSION['datasRegistros'], $data_registro);
         array_push($_SESSION['horasRegistros'], $hora_registro);
         array_push($_SESSION['diasSemanas'], $dia_semana);
-        array_push($_SESSION['carasTrabalhos'], $cargaTrabalho);
+        array_push($_SESSION['cargasTrabalhos'], $cargaTrabalho);
         array_push($_SESSION['horas'], $horas);
         header("Location: inicial.php");
 }

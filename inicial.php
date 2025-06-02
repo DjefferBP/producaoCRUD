@@ -11,7 +11,7 @@
     if (!isset($_SESSION['datasRegistros'])) $_SESSION['datasRegistros'] = [];
     if (!isset($_SESSION['horasRegistros'])) $_SESSION['horasRegistros'] = [];
     if (!isset($_SESSION['diasSemanas'])) $_SESSION['diasSemanas'] = [];
-    if (!isset($_SESSION['carasTrabalhos'])) $_SESSION['carasTrabalhos'] = [];
+    if (!isset($_SESSION['cargasTrabalhos'])) $_SESSION['cargasTrabalhos'] = [];
     if (!isset($_SESSION['horas'])) $_SESSION['horas'] = [];
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
@@ -64,7 +64,7 @@
 
 <body>
     <!-- Sidebar do site -->
-    <!-- Verificando se é o Adm ou o trabalhado r que está logado -->
+    <!-- Verificando se é o Adm ou o trabalhador que está logado -->
     <main class=main-container>
         <?php
             if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){        
@@ -87,9 +87,9 @@
                 echo ' alt="Imagem do usuário">
                                 </div>
                                 <div class="nomeEDisplay">
-                                    <div class="profile-title">Usuário</div>
+                                    <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a class="sair" href="sair.php"><button class="btn-danger">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -242,26 +242,50 @@
                     echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>";
-                                echo "<form method='post' action='inicial.php'";
-                                     echo "<span>Escolha a data inicial </span>";
-                                    echo "<select class='form-select' name='datai' required>";
-                                        $totalDatas = count($_SESSION['datasRegistros']);
-                                        $datasUnicas = array_unique($_SESSION['datasRegistros']);
-                                        for($i = 0; $i < $totalDatas; $i++){
-                                            echo "<option value='data$i'>$datasUnicas[$i]</option>";
-                                        }
-                                    echo "</select>";
-                                    echo "<span>Escolha a data final</span>";
-                                    echo "<select class='form-select' name='dataf' required>";
-                                        $totalDatas = count($_SESSION['datasRegistros']);
-                                        $datasUnicas = array_unique($_SESSION['datasRegistros']);
-                                        for($i = 0; $i < $totalDatas; $i++){
-                                            echo "<option value='data$i'>$datasUnicas[$i]</option>";
-                                        }
-                                    echo "</select>";
+                                <h2 class='profile-title' style='font-size: 28px;'><b>Produção</b></h2>";
+                                echo "<form class='dataForm' method='post' action='inicial.php'>";
+                                    echo "<span class='profile-title'><b>Escolha a data inicial</b></span>";
+                                    echo "<input type='date' class='data' name='dataFinal'/>";
+                                    echo "<span class='profile-title'><b>Escolha a data final</b></span>";
+                                    echo "<input type='date' class='data' name='dataFinal' />";
                                     echo "<input class='btn btn-primary' type='submit' value='FILTRAR'/>";
                                 echo "</form>";
+                                echo "<div>";
+                                echo "<h2 class='profile-title' style='font-size: 14px;'>Dados</h2>";
+                              echo "<div class='subcard'>";
+                              echo "<div class='tools'>";
+                                echo "<div class='circle'>";
+                               echo " <span class='red box'></span>";
+                                echo "</div>";
+                                echo "<div class='circle'>";
+                                echo "<span class='yellow box'></span>";
+                                echo "</div>";
+                                echo "<div class='circle'>";
+                                echo "<span class='green box'></span>";
+                                echo "</div>";
+                               echo " </div>";
+                               echo " <div class='card__content'>";
+                               include "dadosProducao/prodgraphs.php";
+                               echo " </div>";
+                                echo "</div>";
+                                     include "dadosProducao/prodgraphs.php";
+                                echo "</div>";
+                                echo "<div>";
+                                    echo "<h2 class='profile-title' style='font-size: 14px;'>Retrabalho</h2>";
+                                     include "dadosProducao/retrabalho.php";
+                                echo "</div>";
+                                echo "<div>";
+                                     echo "<h2 class='profile-title' style='font-size: 14px;'>Tolerância</h2>";
+                                     include "dadosProducao/tolerancia.php";
+                                echo "</div>";
+                                echo "<div>";
+                                     echo "<h2 class='profile-title' style='font-size: 14px;'>Prejuízo</h2>";
+                                     include "dadosProducao/prejuizo.php";
+                                echo "</div>";
+                                echo "<div>";
+                                     echo "<h2 class='profile-title' style='font-size: 14px;'>Trabalhadores</h2>";
+                                     include "dadosProducao/trabalhadores.php";
+                                echo "</div>";
                             echo "</div>";
                         echo "</div>";         
                 }

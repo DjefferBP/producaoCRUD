@@ -1,6 +1,7 @@
             :root {
                 --corPrimaria: #9301fd;
                 --corSecundaria: #b95afd;
+                --corTerciaria: rgb(214, 156, 255);
                 --corContorno: #d9d9d9;
                 --corFundo: #ffffff;
                 --header-height: 4em;
@@ -381,15 +382,27 @@
             }
 
             .red {
-                background-color: #ff605c;
+                    background-color: var(--corPrimaria);
+                }
+
+                .yellow {
+                    background-color: var(--corSecundaria);
+                }
+
+                .green {
+                    background-color: var(--corTerciaria);
+                }
+
+            .btn-primary {
+                background-color: var(--corPrimaria) !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0.8em !important;
+                font-weight: bold !important;
             }
 
-            .yellow {
-                background-color: #ffbd44;
-            }
-
-            .green {
-                background-color: #00ca4e;
+            .btn-primary:hover {
+                background-color: var(--corSecundaria) !important;
             }
 
             /* Responsividade para telas menores */
@@ -654,8 +667,9 @@
                     font-size: 0.8em;
                     transition: all 0.2s ease;
                     background-color: #EC221F;
-                    margin-top: -2.5em;
-                    margin-left: 6em;
+                    top: 12em;
+                    position: absolute;
+                    left: 5em;
                 }
 
                 .logo {
@@ -866,15 +880,15 @@
                 }
 
                 .red {
-                    background-color: #ff605c;
+                    background-color: var(--corPrimaria);
                 }
 
                 .yellow {
-                    background-color: #ffbd44;
+                    background-color: var(--corSecundaria);
                 }
 
                 .green {
-                    background-color: #00ca4e;
+                    background-color: var(--corTerciaria);
                 }
             }
 
@@ -950,7 +964,7 @@
                     display: flex;
                     flex-direction: row;
                     gap: 1.5em;
-                    align-items: center;
+                    align-items: flex-start;
                 }
 
                 .nomeEDisplay {
@@ -965,7 +979,6 @@
                     font-size: 0.8em;
                     font-weight: 600;
                     color: #1a1a1a;
-                    margin-bottom: 0.25em;
                 }
 
                 .profile-title {
@@ -1038,8 +1051,14 @@
                     font-size: 0.8em;
                     transition: all 0.2s ease;
                     background-color: #EC221F;
-                    margin-top: -2.5em;
-                    margin-left: 6em;
+                    top: 12em;
+                    position: absolute;
+                    left: 5em;
+                }
+
+                .dataForm .data {
+                    margin-left: 1em;
+                    margin-right: 1em;
                 }
 
                 .logo {
@@ -1231,6 +1250,15 @@
                     left: 14em;
                 }
 
+                .subcard {
+                    width: 24em;
+                    height: 18em;
+                    margin: 0 auto;
+                    background-color: #fcfcfc;
+                    border-radius: 8px;
+                    z-index: 1;
+                }
+
                 .tools {
                     display: flex;
                     align-items: center;
@@ -1251,15 +1279,15 @@
                 }
 
                 .red {
-                    background-color: #ff605c;
+                    background-color: var(--corPrimaria);
                 }
 
                 .yellow {
-                    background-color: #ffbd44;
+                    background-color: var(--corSecundaria);
                 }
 
                 .green {
-                    background-color: #00ca4e;
+                    background-color: var(--corTerciaria);
                 }
             }
 
@@ -1633,15 +1661,15 @@
                 }
 
                 .red {
-                    background-color: #ff605c;
+                    background-color: var(--corPrimaria);
                 }
 
                 .yellow {
-                    background-color: #ffbd44;
+                    background-color: var(--corSecundaria);
                 }
 
                 .green {
-                    background-color: #00ca4e;
+                    background-color: var(--corTerciaria);
                 }
             }
 
@@ -1699,4 +1727,4 @@
                     top: 2em;
                     left: -14em;
                 }
-                }
+            }

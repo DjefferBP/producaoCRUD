@@ -33,5 +33,15 @@
         array_push($_SESSION['diasSemanas'], $dia_semana);
         array_push($_SESSION['cargasTrabalhos'], $cargaTrabalho);
         array_push($_SESSION['horas'], $horas);
+        $diretorio = 'dadosUserjson/';
+        file_put_contents($diretorio . 'quantidades.json', json_encode($_SESSION['quantidades'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'prejuizos.json', json_encode($_SESSION['prejuizos'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'cargas.json', json_encode($_SESSION['cargas'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'datasRegistros.json', json_encode($_SESSION['datasRegistros'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'horasRegistros.json', json_encode($_SESSION['horasRegistros'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'diasSemanas.json', json_encode($_SESSION['diasSemanas'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'cargasTrabalhos.json', json_encode($_SESSION['cargasTrabalhos'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'horas.json', json_encode($_SESSION['horas'], JSON_PRETTY_PRINT));
+
         header("Location: inicial.php");
 }

@@ -5,14 +5,22 @@
     }
     $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
-    if (!isset($_SESSION['quantidades'])) $_SESSION['quantidades'] = [];
-    if (!isset($_SESSION['prejuizos'])) $_SESSION['prejuizos'] = [];
-    if (!isset($_SESSION['cargas'])) $_SESSION['cargas'] = [];
-    if (!isset($_SESSION['datasRegistros'])) $_SESSION['datasRegistros'] = [];
-    if (!isset($_SESSION['horasRegistros'])) $_SESSION['horasRegistros'] = [];
-    if (!isset($_SESSION['diasSemanas'])) $_SESSION['diasSemanas'] = [];
-    if (!isset($_SESSION['cargasTrabalhos'])) $_SESSION['cargasTrabalhos'] = [];
-    if (!isset($_SESSION['horas'])) $_SESSION['horas'] = [];
+    $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
+    $prejuizo = json_decode(file_get_contents('dadosUserjson/prejuizos.json'), true);
+    $cargas = json_decode(file_get_contents('dadosUserjson/cargas.json'), true);
+    $datasRegistros = json_decode(file_get_contents('dadosUserjson/datasRegistros.json'), true);
+    $horasRegistros = json_decode(file_get_contents('dadosUserjson/horasRegistros.json'), true);
+    $diasSemanas = json_decode(file_get_contents('dadosUserjson/diasSemanas.json'), true);
+    $cargasTrabalhos = json_decode(file_get_contents('dadosUserjson/cargasTrabalhos.json'), true);
+    $horas =    json_decode(file_get_contents('dadosUserjson/horas.json'), true);
+    if (!isset($_SESSION['quantidades'])){} $_SESSION['quantidades'] = $quantidade;
+    if (!isset($_SESSION['prejuizos'])) $_SESSION['prejuizos'] = $prejuizo;
+    if (!isset($_SESSION['cargas'])) $_SESSION['cargas'] = $cargas;
+    if (!isset($_SESSION['datasRegistros'])) $_SESSION['datasRegistros'] = $diasSemanas;
+    if (!isset($_SESSION['horasRegistros'])) $_SESSION['horasRegistros'] = $horasRegistros;
+    if (!isset($_SESSION['diasSemanas'])) $_SESSION['diasSemanas'] = $diasSemanas;
+    if (!isset($_SESSION['cargasTrabalhos'])) $_SESSION['cargasTrabalhos'] = $cargasTrabalhos;
+    if (!isset($_SESSION['horas'])) $_SESSION['horas'] = $horas;
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
             $email = json_decode(file_get_contents("jsons/emailadm.json"), true);

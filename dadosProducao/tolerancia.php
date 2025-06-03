@@ -8,5 +8,5 @@
         $tolerancia = $_POST['editarTolerancia'];
         $somaQt = array_sum($quantidade);
         $tolerar = $somaQt * ($tolerancia / 100);
-        echo "<h4 style='font-size: 16px'><b>$tolerancia%</b>($tolerar)";
+        echo "<h4 style='font-size: 16px'><b>$tolerancia%</b>($tolerar)</h4>";
     }

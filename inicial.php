@@ -3,24 +3,24 @@
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
+    if (!isset($_SESSION['quantidades'])){
+        $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
+        $_SESSION['quantidades'] = $quantidade;
+        $prejuizo = json_decode(file_get_contents('dadosUserjson/prejuizos.json'), true);
+        $_SESSION['prejuizos'] = $prejuizo;
+        $dataRegistro = json_decode(file_get_contents('dadosUserjson/datasRegistros.json'), true);
+        $_SESSION['datasRegistros'] = $dataRegistro;
+        $horasRegistros = json_decode(file_get_contents('dadosUserjson/horasRegistros.json'), true);
+        $_SESSION['horasRegistros'] = $horasRegistros;
+        $diasSemana = json_decode(file_get_contents('dadosUserjson/diasSemanas.json'), true);
+        $_SESSION['diasSemanas'] = $diasSemana;
+        $cargasTrabalhos = json_decode(file_get_contents('dadosUserjson/cargasTrabalhos.json'), true);
+        $_SESSION['cargasTrabalhos'] = $cargasTrabalhos;
+        $horas = json_decode(file_get_contents('dadosUserjson/horas.json'), true);
+        $_SESSION['horas'] = $horas;
+    }
     $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
-    $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
-    $prejuizo = json_decode(file_get_contents('dadosUserjson/prejuizos.json'), true);
-    $cargas = json_decode(file_get_contents('dadosUserjson/cargas.json'), true);
-    $datasRegistros = json_decode(file_get_contents('dadosUserjson/datasRegistros.json'), true);
-    $horasRegistros = json_decode(file_get_contents('dadosUserjson/horasRegistros.json'), true);
-    $diasSemanas = json_decode(file_get_contents('dadosUserjson/diasSemanas.json'), true);
-    $cargasTrabalhos = json_decode(file_get_contents('dadosUserjson/cargasTrabalhos.json'), true);
-    $horas =    json_decode(file_get_contents('dadosUserjson/horas.json'), true);
-    if (!isset($_SESSION['quantidades'])){} $_SESSION['quantidades'] = $quantidade;
-    if (!isset($_SESSION['prejuizos'])) $_SESSION['prejuizos'] = $prejuizo;
-    if (!isset($_SESSION['cargas'])) $_SESSION['cargas'] = $cargas;
-    if (!isset($_SESSION['datasRegistros'])) $_SESSION['datasRegistros'] = $diasSemanas;
-    if (!isset($_SESSION['horasRegistros'])) $_SESSION['horasRegistros'] = $horasRegistros;
-    if (!isset($_SESSION['diasSemanas'])) $_SESSION['diasSemanas'] = $diasSemanas;
-    if (!isset($_SESSION['cargasTrabalhos'])) $_SESSION['cargasTrabalhos'] = $cargasTrabalhos;
-    if (!isset($_SESSION['horas'])) $_SESSION['horas'] = $horas;
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
             $email = json_decode(file_get_contents("jsons/emailadm.json"), true);
@@ -236,11 +236,6 @@
                                             <input type='number' name='prejuizo' class='form-control' min='0' id='prejuizo' required>
                                             <div id='prejuizo' class='form-text'>Insira a quantidade de sapatos perdidos hoje</div>
                                         </div>
-                                        <div class='mb-3'>
-                                            <label for='horaria' class='form-label'>Sua carga horária de hoje</label>
-                                            <input required type='number' name='carga' min='0' class='form-control' id='carga'>
-                                            <div id='carga' class='form-text'>Sua carga horária em minutos. Ex: 2 horas = 120 min</div>
-                                        </div>
                                         <button type='submit' class='btn btn-primary'>Submit</button>
                                         </form>
                                 </div>
@@ -292,7 +287,7 @@
                                 echo "</div>";
                                 echo "<div>";
                                      echo "<h2 class='profile-title' style='font-size: 14px;'>Trabalhadores</h2>";
-                                     include "dadosProducao/trabalhadores.php";
+                                     include "dadosProducao/trabalhadores.php";                                    
                                 echo "</div>";
                             echo "</div>";
                         echo "</div>";         

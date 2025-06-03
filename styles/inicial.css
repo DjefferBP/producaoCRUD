@@ -1254,7 +1254,9 @@
                     width: 24em;
                     height: 18em;
                     margin: 0 auto;
-                    background-color: #fcfcfc;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                    -0.25rem -0.25rem 1.25rem #ffffff;
                     border-radius: 8px;
                     z-index: 1;
                 }

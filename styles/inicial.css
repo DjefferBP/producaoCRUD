@@ -382,16 +382,16 @@
             }
 
             .red {
-                    background-color: var(--corPrimaria);
-                }
+                background-color: var(--corPrimaria);
+            }
 
-                .yellow {
-                    background-color: var(--corSecundaria);
-                }
+            .yellow {
+                background-color: var(--corSecundaria);
+            }
 
-                .green {
-                    background-color: var(--corTerciaria);
-                }
+            .green {
+                background-color: var(--corTerciaria);
+            }
 
             .btn-primary {
                 background-color: var(--corPrimaria) !important;
@@ -1256,9 +1256,85 @@
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                    -0.25rem -0.25rem 1.25rem #ffffff;
+                        -0.25rem -0.25rem 1.25rem #ffffff;
                     border-radius: 8px;
                     z-index: 1;
+                    position: absolute;
+                }
+
+                .subcard2 {
+                    width: 14em;
+                    height: 6em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 8px;
+                    z-index: 1;
+                    margin-bottom: 1em;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                }
+                
+                .subcard3 {
+                    width: 14em;
+                    height: 6em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 8px;
+                    z-index: 1;
+                    margin-bottom: 1em;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                }
+
+
+                .subcard4 {
+                    width: 14em;
+                    height: 6em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 8px;
+                    z-index: 1;
+                    margin-bottom: 1em;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                }
+
+                .subcard5 {
+                    width: 14em;
+                    height: 6em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 8px;
+                    z-index: 1;
+                    margin-bottom: 1em;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                }
+
+                .subcard6 {
+                    width: 14em;
+                    height: 6em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 8px;
+                    z-index: 1;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
                 }
 
                 .tools {

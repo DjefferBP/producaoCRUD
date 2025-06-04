@@ -1246,6 +1246,21 @@
                     border-radius: 0.3em;
                     z-index: 1;
                 }
+
+                .card2 {
+                    width: 15em;
+                    border: 0.1em solid var(--corContorno);
+                    height: 45em;
+                    margin-left: -6em;
+                    background-color: white;
+                    border-radius: 0.3em;
+                    z-index: 1;
+                    position: absolute;
+                    left: 106em;
+                    top: 9.43em;
+                    padding: 1em;
+                }
+
                 .subcard {
                     width: 30em;
                     height: 30em;

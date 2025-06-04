@@ -104,7 +104,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a class="sair" href="sair.php"><button class="btn-danger">Sair</button></a>
+                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -133,48 +133,152 @@
 
                         <!-- Conteúdo principal do site -->
                         <div class="info">
-                            <h1>DashBoard</h1>
                 ';
 
                 if (isset($_GET['funcionario'])) {
-                    echo "<p class='profile-title'>Funcionários</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<br/>";
+                    echo "<br/>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='card_title'>Funcionários</h2>
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Funcionários</span>
                             </div>
                         </div>";
                 } elseif (isset($_GET['partida'])) {
-                    echo "<p class='profile-title'>Partida</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<br/>";
+                    echo "<br/>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='card_title'>Partidas</h2>
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Partidas</span>
                             </div>
                         </div>";
                 } elseif (isset($_GET['relatorio'])) {
-                    echo "<p class='profile-title'>Relatório</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<br/>";
+                    echo "<br/>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='card_title'>Relatórios</h2>
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Relatórios</span>
                             </div>
                         </div>";
                 } else {
-                    echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<br/>";
+                    echo "<br/>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='profile-title' style='font-size: 28px;'>Produção</h2>
-                            </div>
-                        </div>";
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Produção</span>";
+                                echo "<form class='dataForm' method='post' action='inicial.php'>";
+                                    echo "<span class='profile-title'><b>Escolha a data inicial</b></span>";
+                                    echo "<input type='date' class='data' name='dataInicial'/>";
+                                    echo "<span class='profile-title'><b>Escolha a data final</b></span>";
+                                    echo "<input type='date' class='data' name='dataFinal' />";
+                                    echo "<input class='btn btn-primary' type='submit' value='FILTRAR'/>";
+                                echo "</form>";
+                                echo "<div>";
+                                echo "<br/>";
+                                echo "<h2 class='profile-title' style='font-size: 18px; font-weight: bold'>Dados:</h2>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/prodgraphs.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard2'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            echo "<h2 class='profile-title' style='font-size: 14px;'>Retrabalho</h2>";
+                            include "dadosProducao/retrabalho.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard3'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            echo "<h2 class='profile-title' style='font-size: 14px;'>Tolerância</h2>";
+                            include "dadosProducao/tolerancia.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard4'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            echo "<h2 class='profile-title' style='font-size: 14px;'>Prejuízo</h2>";
+                            include "dadosProducao/prejuizo.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard5'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            echo "<h2 class='profile-title' style='font-size: 14px;'>Trabalhadores</h2>";
+                            include "dadosProducao/trabalhadores.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='subcard6'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            echo "<h2 class='profile-title' style='font-size: 14px;'>Produção total (com prejuízos)</h2>";
+                            include "dadosProducao/producao.php";
+                        echo "</div>";
+                    echo "</div>";
+                    
                 }
 
                 echo '
                         </div>
 
                         <a href="inicial.php">
-                            <img src="img/logo.svg" class="logo" alt="Logo da empresa, letras PG estilizadas em azul, fundo branco, transmite sensação de modernidade">
+                            <img src="img/logo.svg" class="logo" alt="Logo da empresa">
                         </a>   
                     </div>
                 </div>
                 ';
+                
+                if (!isset($_GET['funcionario']) && !isset($_GET['partida']) && !isset($_GET['relatorio'])) {
+                    echo "
+                        <div class='card2'>
+                            <form method='POST' action='dadosProducao/tolerancia.php'>
+                                <div class='mb-3'>
+                                    <label for='exampleInputEmail1' class='form-label'>Edite a tolerância permitida</label>
+                                    <br/>
+                                    <div class='input-group mb-3'>
+                                        <input type='number' min='0' name='editarTolerancia' class='form-control' id='tolerancia' placeholder='Ex: 2' required>
+                                        <span class='input-group-text'>%</span>
+                                </div>
+                                <button type='submit' class='btn btn-primary'>Atualizar</button>
+                            </form>
+                        </div>
+                        ";
+                }
+                
 
             }
             else {
@@ -247,10 +351,11 @@
                             </div>
                         </div>";
                 } else {
-                    echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
+                    echo "<br/>";
+                    echo "<br/>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Produção de </span><span style='color:#666; font-weight: bold; font-size: 24px;'>" . date('d/m/Y') . "</span>";
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Produção</span>";
                                 echo "<form class='dataForm' method='post' action='inicial.php'>";
                                     echo "<span class='profile-title'><b>Escolha a data inicial</b></span>";
                                     echo "<input type='date' class='data' name='dataInicial'/>";

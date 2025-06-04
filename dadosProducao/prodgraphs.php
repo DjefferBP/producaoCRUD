@@ -56,11 +56,18 @@
         --corContorno: #d9d9d9;
         --corFundo: #ffffff;
       }
+      @media (min-width: 1728px) {
+        #chart_div {
+          position: absolute;
+          left: -20%;
+          top: -2%;
+        }
+      }
     </style>
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div" style="position: absolute; left: -20%; top: -2%"></div>
+    <div id="chart_div"></div>
   </body>
 </html>

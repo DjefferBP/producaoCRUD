@@ -21,6 +21,13 @@
     }
     $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
+    $diretorio = 'dadosProducao/tolerancia.json';
+        if (!isset($_SESSION['tole']) && file_exists($diretorio)) {
+            $tolerancia = json_decode(file_get_contents($diretorio), true);
+            $_SESSION['tole'] = $tolerancia;
+        } elseif (!isset($_SESSION['tole'])) {
+            $_SESSION['tole'] = [2]; 
+        }
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
             $email = json_decode(file_get_contents("jsons/emailadm.json"), true);

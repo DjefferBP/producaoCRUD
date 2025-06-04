@@ -34,8 +34,8 @@
         // Set chart options
         var options = {
           'title': 'Informações',
-          'width': 400,
-          'height': 300,
+          'width': 700,
+          'height': 600,
           slices: {
             0: { color: '#B6E2A1' },
             1: { color: '#DA6C6C' }
@@ -61,6 +61,6 @@
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <div id="chart_div" style="position: absolute; left: -20%; top: -2%"></div>
   </body>
 </html>

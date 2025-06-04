@@ -216,11 +216,9 @@
 
                         <!-- Conteúdo principal do site -->
                         <div class="info">
-                            <h1>DashBoard</h1>
                 ';
 
                 if (isset($_GET['diaria'])) {
-                    echo "<p class='profile-title'>Registro Diário</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
                                 <h2 class='profile-title' style='font-size: 28px;'>Registro</h2>
@@ -236,7 +234,7 @@
                                             <input type='number' name='prejuizo' class='form-control' min='0' id='prejuizo' required>
                                             <div id='prejuizo' class='form-text'>Insira a quantidade de sapatos perdidos hoje</div>
                                         </div>
-                                        <button type='submit' class='btn btn-primary'>Submit</button>
+                                        <button type='submit' class='btn btn-primary'>Enviar</button>
                                         </form>
                                 </div>
                             </div>
@@ -245,7 +243,7 @@
                     echo "<p class='profile-title'>Produção</p><span style='color:#666; font-weight: bold;'>" . date('d/m/Y') . "</span>";
                     echo "<div class='card'>
                             <div class='card_content'>
-                                <h2 class='profile-title' style='font-size: 28px;'><b>Produção</b></h2>";
+                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Produção de </span><span style='color:#666; font-weight: bold; font-size: 24px;'>" . date('d/m/Y') . "</span>";
                                 echo "<form class='dataForm' method='post' action='inicial.php'>";
                                     echo "<span class='profile-title'><b>Escolha a data inicial</b></span>";
                                     echo "<input type='date' class='data' name='dataInicial'/>";
@@ -254,7 +252,8 @@
                                     echo "<input class='btn btn-primary' type='submit' value='FILTRAR'/>";
                                 echo "</form>";
                                 echo "<div>";
-                                echo "<h2 class='profile-title' style='font-size: 14px;'>Dados</h2>";
+                                echo "<br/>";
+                                echo "<h2 class='profile-title' style='font-size: 18px; font-weight: bold'>Dados:</h2>";
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
@@ -334,8 +333,8 @@
                         </div>
 
                         <a href="inicial.php">
-                            <img src="img/logo.svg" class="logo" alt="Logo da empresa, letras PG estilizadas em azul, fundo branco, transmite sensação de modernidade">
-                        </a>   
+                            <img src="img/logo.svg" class="logo" alt="Logo da empresa">
+                        </a>
                     </div>
                 </div>
                 ';

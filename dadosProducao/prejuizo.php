@@ -1,8 +1,9 @@
 <?php 
-    if (!isset($_POST['editarTolerancia'])){
+    if (!file_exists("tolerancia.json")) {
         $quantidade = $_SESSION['quantidades'];
         $somaQt = array_sum($quantidade);
-        $tolerancia = $somaQt * 0.02;
+
+        $tolerancia = $_SESSION['tole'][0] ?? 2;
         $perdaTotal = $_SESSION['prejuizos'];
         $perdaT = array_sum($perdaTotal);
         $prejuizo = max(0, $perdaT - $tolerancia);
@@ -12,11 +13,12 @@
     else {
         $quantidade = $_SESSION['quantidades'];
         $somaQt = array_sum($quantidade);
-        $tolerancia = $_POST['editarTolerancia'];
-        $novaTole = $somaQt * ($tolerancia / 100);
+        $toleranciaArray = json_decode(file_get_contents("tolerancia.json"), true);
+        $tolerancia = $toleranciaArray[0];
         $perdaTotal = $_SESSION['prejuizos'];
         $perdaT = array_sum($perdaTotal);
-        $prejuizo = max(0, $perdaT - $novaTole);
+        $prejuizo = max(0, $perdaT - $tolerancia);
         $porce = ($prejuizo / $somaQt) * 100;
         echo "<h4 style='font-size: 22px'><b>Prejuízo:". round($porce, 1). "%</b>($prejuizo)</h4>";
     }
+    

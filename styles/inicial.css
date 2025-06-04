@@ -1251,8 +1251,8 @@
                 }
 
                 .subcard {
-                    width: 24em;
-                    height: 18em;
+                    width: 30em;
+                    height: 30em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1260,11 +1260,13 @@
                     border-radius: 8px;
                     z-index: 1;
                     position: absolute;
+                    top: 20em;
+                    left: 4em;
                 }
 
                 .subcard2 {
-                    width: 14em;
-                    height: 6em;
+                    width: 16em;
+                    height: 8em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1275,11 +1277,14 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: wrap;
+                    position: absolute;
+                    top: 20em;
+                    left: 36em;
                 }
                 
                 .subcard3 {
-                    width: 14em;
-                    height: 6em;
+                    width: 16em;
+                    height: 8em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1290,12 +1295,15 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: wrap;
+                    position: absolute;
+                    top: 29em;
+                    left: 36em;
                 }
 
 
                 .subcard4 {
-                    width: 14em;
-                    height: 6em;
+                    width: 16em;
+                    height: 8em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1306,11 +1314,14 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: wrap;
+                    position: absolute;
+                    top: 38em;
+                    left: 36em;
                 }
 
                 .subcard5 {
-                    width: 14em;
-                    height: 6em;
+                    width: 16em;
+                    height: 8em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1321,11 +1332,14 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: wrap;
+                    position: absolute;
+                    top: 20em;
+                    left: 53em;
                 }
 
                 .subcard6 {
-                    width: 14em;
-                    height: 6em;
+                    width: 16em;
+                    height: 8em;
                     margin: 0 auto;
                     background-color: #fff;
                     box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
@@ -1335,6 +1349,9 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: wrap;
+                    position: absolute;
+                    top: 29em;
+                    left: 53em;
                 }
 
                 .tools {

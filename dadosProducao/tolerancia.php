@@ -9,7 +9,7 @@
         $tolerancia = isset($_SESSION['tole'][0]) ? floatval($_SESSION['tole'][0]) : 2;
         $tolerar = $somaQt * ($tolerancia / 100);
 
-        echo "<h4 style='font-size: 22px'><b>{$tolerancia}%</b> (".round($tolerar).")</h4>";
+        echo "<h4 style='font-size: 18px'><b>{$tolerancia}%</b> (".round($tolerar).")</h4>";
     } else {
         $quantidade = $_SESSION['quantidades'];
         $somaQt = array_sum($quantidade);
@@ -17,7 +17,7 @@
         $tolerancia = isset($toleranciaArray[0]) ? floatval($toleranciaArray[0]) : 2;
         $tolerar = $somaQt * ($tolerancia / 100);
 
-        echo "<h4 style='font-size: 22px'><b>{$tolerancia}%</b> (".round($tolerar).")</h4>";
+        echo "<h4 style='font-size: 18px'><b>{$tolerancia}%</b> (".round($tolerar).")</h4>";
     }
 
     if(isset($_POST['editarTolerancia'])){

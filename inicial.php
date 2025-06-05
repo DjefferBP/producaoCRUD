@@ -3,11 +3,14 @@
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
-    if (!isset($_SESSION['nomesUser'])){
+    if (!isset($_SESSION['nomesUser']) && file_exists('dadosUserjson/emailUser.json')) {
         $nomesUser = json_decode(file_get_contents('dadosUserjson/nomesUser.json'), true);
         $_SESSION['nomesUser'] = $nomesUser;
-        $emailUser = json_decode(file_get_contents('dadosUserjson/email.json'), true);
+        $emailUser = json_decode(file_get_contents('dadosUserjson/emailUser.json'), true);
         $_SESSION['emailUser'] = $emailUser;
+    } elseif (!isset($_SESSION['nomesUser'])){
+        $_SESSION['nomesUser'] = [];
+        $_SESSION['emailUser'] = [];
     }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
@@ -29,11 +32,18 @@
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
     $diretorio = 'dadosProducao/tolerancia.json';
         if (!isset($_SESSION['tole']) && file_exists($diretorio)) {
-            $tolerancia = json_decode(file_get_contents($diretorio), true);
-            $_SESSION['tole'] = $tolerancia;
-        } elseif (!isset($_SESSION['tole'])) {
-            $_SESSION['tole'] = [2]; 
-        }
+        $tolerancia = json_decode(file_get_contents($diretorio), true);
+        $_SESSION['tole'] = $tolerancia;
+    } elseif (!isset($_SESSION['tole'])) {
+        $_SESSION['tole'] = [2]; 
+    }
+    $diretorioMeta = 'dadosProducao/meta.json';
+    if (!isset($_SESSION['meta']) && file_exists($diretorioMeta)) {
+        $meta = json_decode(file_get_contents($diretorioMeta), true);
+        $_SESSION['meta'] = $meta;
+    } elseif (!isset($_SESSION['meta'])) {
+        $_SESSION['meta'] = []; 
+    }
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
             $email = json_decode(file_get_contents("jsons/emailadm.json"), true);
@@ -280,8 +290,26 @@
                                         <input type='number' min='0' name='editarTolerancia' class='form-control' id='tolerancia' placeholder='Ex: 2' required>
                                         <span class='input-group-text'>%</span>
                                 </div>
+
                                 <button type='submit' class='btn btn-primary'>Atualizar</button>
+                                
                             </form>
+                            <div class='subcard7'>
+                                <div class='card__content'>
+                                    <h2 class='profile-title' style='font-size: 14px;'>Meta</h2>";
+                                    include "dadosProducao/meta.php";
+                                    echo "<form method='POST' action='dadosProducao/meta.php'>
+                                    <div class='mb-3'>
+                                        <label for='exampleInputEmail1' class='form-label'>Edite a sua meta</label>
+                                        <br/>
+                                        <div class='input-group mb-3 inputMeta'>
+                                            <input type='number' min='0' name='editarMeta' class='form-control' id='meta' placeholder='Ex: 1000' required>
+                                            <span class='input-group-text'>Qt</span>
+                                    </div>
+                                    <button type='submit' class='btn btn-primary'>Atualizar</button>
+                                </form>";
+                                echo "</div>
+                            </div>
                         </div>
                         ";
                 }
@@ -457,6 +485,11 @@
                     </div>
                 </div>
                 ';
+                echo "
+                        <div class='card2'>
+                            
+                        </div>
+                        ";
 
             }
         ?>

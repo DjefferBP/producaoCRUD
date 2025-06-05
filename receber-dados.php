@@ -67,7 +67,7 @@
         $emailUser = $email[$id];
         array_push($_SESSION['nomesUser'] , $nomeUser);
         array_push($_SESSION['emailUser'] , $emailUser);
-        file_put_contents($diretorio . 'emailUser.json', json_encode($_SESSION['emaiUser'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'emailUser.json', json_encode($_SESSION['emailUser'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'nomesUser.json', json_encode($_SESSION['nomesUser'], JSON_PRETTY_PRINT));
         header("Location: inicial.php");
 }

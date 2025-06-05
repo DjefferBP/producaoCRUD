@@ -1363,14 +1363,42 @@
                     top: -0.5em;
                     left: 52em;
                 }
+                .subcard7 {
+                    width: 13em;
+                    height: 13em;
+                    padding-top: 3em;
+                    padding-bottom: 2.3em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    border: 1px solid var(--corContorno);
+                    padding-left: 1em;
+                    border-radius: 0.3em;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 10em;
+                }
+                .inputMeta {
+                    max-width: 11em;
+                }
 
                 .tools {
                     display: flex;
                     align-items: flex-start;
                     justify-content: flex-start;
-                    padding: 9px;
+                    padding: 0.5em;
                 }
-
+                .tools2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0.5em;
+                    flex-direction: column;
+                }
                 .circle {
                     padding: 0 0.3em 0 0;
                 }
@@ -1381,14 +1409,13 @@
                     justify-content: flex-start;
                     width: 10px;
                     height: 10px;
-                    padding: 1px;
+                    padding: 0.05em;
                     border-radius: 50%;
                 }
-
                 .red {
                     background-color: var(--corPrimaria);
                 }
-
+                
                 .yellow {
                     background-color: var(--corSecundaria);
                 }

@@ -60,15 +60,14 @@
         file_put_contents($diretorio . 'diasSemanas.json', json_encode($_SESSION['diasSemanas'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'cargasTrabalhos.json', json_encode($_SESSION['cargasTrabalhos'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'horas.json', json_encode($_SESSION['horas'], JSON_PRETTY_PRINT));
-        $emails = json_decode(file_get_contents("jsons/email.json"), true);
-        $id = array_search($_SESSION['usuario'], $emails);
-        $nomes = $_SESSION['nomes'];
-        $nome = $nomes[$id];
-        $nomeUser = json_encode($nome, JSON_PRETTY_PRINT);
-        file_put_contents($diretorio . 'nomes.json',$nomeUser);
-        $email = $emails[$id];
-        $emailUser = json_encode($email, JSON_PRETTY_PRINT);
-        file_put_contents($diretorio . 'emails.json', $emailUser);
-
+        $email = json_decode(file_get_contents("jsons/email.json"), true);
+        $id = array_search($_SESSION['usuario'], $email);
+        $nome = json_decode(file_get_contents('jsons/nome.json'), true);
+        $nomeUser = $nome[$id];
+        $emailUser = $email[$id];
+        array_push($_SESSION['nomesUser'] , $nomeUser);
+        array_push($_SESSION['emailUser'] , $emailUser);
+        file_put_contents($diretorio . 'emailUser.json', json_encode($_SESSION['emaiUser'], JSON_PRETTY_PRINT));
+        file_put_contents($diretorio . 'nomesUser.json', json_encode($_SESSION['nomesUser'], JSON_PRETTY_PRINT));
         header("Location: inicial.php");
 }

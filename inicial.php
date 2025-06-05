@@ -3,6 +3,12 @@
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
+    if (!isset($_SESSION['nomesUser'])){
+        $nomesUser = json_decode(file_get_contents('dadosUserjson/nomesUser.json'), true);
+        $_SESSION['nomesUser'] = $nomesUser;
+        $emailUser = json_decode(file_get_contents('dadosUserjson/email.json'), true);
+        $_SESSION['emailUser'] = $emailUser;
+    }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
         $_SESSION['quantidades'] = $quantidade;

@@ -141,6 +141,7 @@
                     echo "<div class='card'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Funcionários</span>
+                            
                             </div>
                         </div>";
                 } elseif (isset($_GET['partida'])) {
@@ -341,7 +342,7 @@
                                             <div id='seunumero' class='form-text'>Insira a quantidade de sapatos produzido por você hoje</div>
                                         </div>
                                         <div class='mb-3'>
-                                            <label for='preju' class='form-label'>Quantidade de prejuízo</label>
+                                            <label for='preju' class='form-label'>Quantidade de retrabalho</label>
                                             <input type='number' name='prejuizo' class='form-control' min='0' id='prejuizo' required>
                                             <div id='prejuizo' class='form-text'>Insira a quantidade de sapatos perdidos hoje</div>
                                         </div>

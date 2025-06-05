@@ -66,6 +66,9 @@
         $nome = $nomes[$id];
         $nomeUser = json_encode($nome, JSON_PRETTY_PRINT);
         file_put_contents($diretorio . 'nomes.json',$nomeUser);
+        $email = $emails[$id];
+        $emailUser = json_encode($email, JSON_PRETTY_PRINT);
+        file_put_contents($diretorio . 'emails.json', $emailUser);
 
         header("Location: inicial.php");
 }

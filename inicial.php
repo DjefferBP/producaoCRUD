@@ -3,6 +3,13 @@
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
+    $diretorioMeta = 'dadosProducao/meta.json';
+    if (!isset($_SESSION['meta']) && file_exists($diretorioMeta)) {
+        $meta = json_decode(file_get_contents($diretorioMeta), true);
+        $_SESSION['meta'] = $meta;
+    } elseif (!isset($_SESSION['meta'])) {
+        $_SESSION['meta'] = [0]; 
+    }
     if (!isset($_SESSION['nomesUser']) && file_exists('dadosUserjson/emailUser.json')) {
         $nomesUser = json_decode(file_get_contents('dadosUserjson/nomesUser.json'), true);
         $_SESSION['nomesUser'] = $nomesUser;
@@ -36,13 +43,6 @@
         $_SESSION['tole'] = $tolerancia;
     } elseif (!isset($_SESSION['tole'])) {
         $_SESSION['tole'] = [2]; 
-    }
-    $diretorioMeta = 'dadosProducao/meta.json';
-    if (!isset($_SESSION['meta']) && file_exists($diretorioMeta)) {
-        $meta = json_decode(file_get_contents($diretorioMeta), true);
-        $_SESSION['meta'] = $meta;
-    } elseif (!isset($_SESSION['meta'])) {
-        $_SESSION['meta'] = []; 
     }
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
@@ -296,7 +296,7 @@
                             </form>
                             <div class='subcard7'>
                                 <div class='card__content'>
-                                    <h2 class='profile-title' style='font-size: 14px;'>Meta</h2>";
+                                    <h2 class='profile-title' style='font-size: 14px;'>Meta semanal</h2>";
                                     include "dadosProducao/meta.php";
                                     echo "<form method='POST' action='dadosProducao/meta.php'>
                                     <div class='mb-3'>
@@ -310,6 +310,16 @@
                                 </form>";
                                 echo "</div>
                             </div>
+                            <div class='subcard8'>
+                                <div class='card__content'>
+                                    <h2 class='profile-title' style='font-size: 14px;'>Média da produção</h2>";
+                                    include "dadosProducao/mediaProd.php";
+                                echo "</div>
+                            </div>
+                            <div class='subcard9'>
+                                <div class='card__content'>
+                                    ";
+                                echo "</div>
                         </div>
                         ";
                 }

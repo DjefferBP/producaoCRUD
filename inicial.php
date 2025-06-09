@@ -345,9 +345,7 @@
                         </div>
                         ";
                 }
-                
-
-            }
+            
             else {
                 echo '
                 <div class="usuarioDiv">

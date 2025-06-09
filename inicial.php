@@ -131,7 +131,7 @@
                                 <hr>
                                 <a href="inicial.php">Produção</a>
                                 <hr>
-                                <a href="inicial.php?funcionario">Funcionários</a>
+                                <a href="funcionarios.php">Funcionários</a>
                                 <hr>
                                 <a href="inicial.php?partida">Partidas</a>
                                 <hr>
@@ -151,19 +151,10 @@
                         <div class="info">
                 ';
 
-                if (isset($_GET['funcionario'])) {
+                if (isset($_GET['partida'])) {
                     echo "<br/>";
                     echo "<br/>";
-                    echo "<div class='card'>
-                            <div class='card_content'>
-                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Funcionários</span>
-                            
-                            </div>
-                        </div>";
-                } elseif (isset($_GET['partida'])) {
-                    echo "<br/>";
-                    echo "<br/>";
-                    echo "<div class='card'>
+                    echo "<div class='card1'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Partidas</span>
                             </div>
@@ -171,7 +162,7 @@
                 } elseif (isset($_GET['relatorio'])) {
                     echo "<br/>";
                     echo "<br/>";
-                    echo "<div class='card'>
+                    echo "<div class='card1'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Relatórios</span>
                             </div>
@@ -270,16 +261,17 @@
                 }
 
                 echo '
-                        </div>
-
-                        <a href="inicial.php">
+                    </div>';
+                    if (!isset($_GET['partida']) && !isset($_GET['relatorio'])){
+                            echo '<a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
-                        </a>   
-                    </div>
+                        </a>';
+                        }
+                echo '</div>
                 </div>
                 ';
                 
-                if (!isset($_GET['funcionario']) && !isset($_GET['partida']) && !isset($_GET['relatorio'])) {
+                if (!isset($_GET['partida']) && !isset($_GET['relatorio'])) {
                     echo "
                         <div class='card2'>
                             <form method='POST' action='dadosProducao/tolerancia.php'>
@@ -485,21 +477,16 @@
                             include "dadosProducao/producao.php";
                         echo "</div>";
                     echo "</div>";
+                    
                 }
                 echo '
-                        </div>
+                        <div>
 
                         <a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
                         </a>
                     </div>
-                </div>
                 ';
-                echo "
-                        <div class='card2'>
-                            
-                        </div>
-                        ";
 
             }
         ?>

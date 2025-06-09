@@ -45,7 +45,7 @@
         }
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_prod'));
         chart.draw(data, options);
       }
     </script>
@@ -57,7 +57,7 @@
         --corFundo: #ffffff;
       }
       @media (min-width: 1728px) {
-        #chart_div {
+        #chart_div_prod {
           position: absolute;
           left: -20%;
           top: -2%;
@@ -68,6 +68,6 @@
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <div id="chart_div_prod"></div>
   </body>
 </html>

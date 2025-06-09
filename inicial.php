@@ -131,7 +131,7 @@
                                 <hr>
                                 <a href="inicial.php">Produção</a>
                                 <hr>
-                                <a href="inicial.php?funcionario">Funcionários</a>
+                                <a href="funcionarios.php">Funcionários</a>
                                 <hr>
                                 <a href="inicial.php?partida">Partidas</a>
                                 <hr>
@@ -150,20 +150,10 @@
                         <!-- Conteúdo principal do site -->
                         <div class="info">
                 ';
-
-                if (isset($_GET['funcionario'])) {
+                 if (isset($_GET['partida'])) {
                     echo "<br/>";
                     echo "<br/>";
-                    echo "<div class='card'>
-                            <div class='card_content'>
-                                <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Funcionários</span>
-                            
-                            </div>
-                        </div>";
-                } elseif (isset($_GET['partida'])) {
-                    echo "<br/>";
-                    echo "<br/>";
-                    echo "<div class='card'>
+                    echo "<div class='card1'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Partidas</span>
                             </div>
@@ -171,7 +161,7 @@
                 } elseif (isset($_GET['relatorio'])) {
                     echo "<br/>";
                     echo "<br/>";
-                    echo "<div class='card'>
+                    echo "<div class='card1'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Relatórios</span>
                             </div>
@@ -196,7 +186,7 @@
                         echo "</div>";
                     echo "</div>";
 
-                    echo "<div class='subcard'>";
+                    echo "<div class='chartcard'>";
                         echo "<div class='tools'>";
                             echo "<div class='circle'><span class='red box'></span></div>";
                             echo "<div class='circle'><span class='yellow box'></span></div>";
@@ -204,6 +194,17 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             include "dadosProducao/prodgraphs.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='chartcard2'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/metagraphs.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -269,20 +270,28 @@
                     
                 }
 
-                echo '
-                        </div>
-
-                        <a href="inicial.php">
+                 echo '
+                    </div>';
+                    if (!isset($_GET['partida']) && !isset($_GET['relatorio'])){
+                            echo '<a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
-                        </a>   
-                    </div>
+                        </a>';
+                        }
+                echo '</div>
                 </div>
                 ';
                 
-                if (!isset($_GET['funcionario']) && !isset($_GET['partida']) && !isset($_GET['relatorio'])) {
+                if (!isset($_GET['partida']) && !isset($_GET['relatorio'])) {
                     echo "
                         <div class='card2'>
                             <form method='POST' action='dadosProducao/tolerancia.php'>
+                            <div class='subcard7'>
+                                <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                 <div class='mb-3'>
                                     <label for='exampleInputEmail1' class='form-label'>Edite a tolerância permitida</label>
                                     <br/>
@@ -292,10 +301,17 @@
                                 </div>
 
                                 <button type='submit' class='btn btn-primary'>Atualizar</button>
-                                
+                                </div>
+                            </div>
+                            </div>
                             </form>
-                            <div class='subcard7'>
+                            <div class='subcard8'>
                                 <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                     <h2 class='profile-title' style='font-size: 14px;'>Meta semanal</h2>";
                                     include "dadosProducao/meta.php";
                                     echo "<form method='POST' action='dadosProducao/meta.php'>
@@ -310,13 +326,18 @@
                                 </form>";
                                 echo "</div>
                             </div>
-                            <div class='subcard8'>
+                            <div class='subcard9'>
                                 <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                     <h2 class='profile-title' style='font-size: 14px;'>Média da produção</h2>";
                                     include "dadosProducao/mediaProd.php";
                                 echo "</div>
                             </div>
-                            <div class='subcard9'>
+                            <div class='subcard10'>
                                 <div class='card__content'>
                                     ";
                                 echo "</div>

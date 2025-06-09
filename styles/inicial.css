@@ -1247,23 +1247,6 @@
                     z-index: 1;
                 }
 
-                .card1 {
-                width: 80vw;
-                max-width: 90em;
-                height: auto;
-                min-height: 20em;
-                margin: 2em auto;
-                background-color: white;
-                border-radius: 8px;
-                z-index: 1;
-                position: relative;
-                top: -5em;
-                left: -18em;
-                box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05);
-                padding: 2vw;
-                border: 1px solid var(--corContorno);
-            }
-
                 .card2 {
                     width: 15em;
                     border: 0.1em solid var(--corContorno);
@@ -1278,7 +1261,7 @@
                     padding: 1em;
                 }
 
-                .chartcard {
+                .subcard {
                     width: 30em;
                     height: 30em;
                     margin: 0 auto;
@@ -1290,20 +1273,6 @@
                     position: absolute;
                     top: 19em;
                     left: -1.5em;
-                }
-
-                .chartcard2 {
-                    width: 30em;
-                    height: 30em;
-                    margin: 0 auto;
-                    background-color: #fff;
-                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                        -0.25rem -0.25rem 1.25rem #ffffff;
-                    border-radius: 0.3em;
-                    z-index: 1;
-                    position: absolute;
-                    top: 19em;
-                    left: 30em;
                 }
 
                 .subcard2 {
@@ -1396,34 +1365,13 @@
                 }
                 .subcard7 {
                     width: 13em;
-                    height: 14em;
+                    height: 13em;
                     padding-top: 3em;
                     padding-bottom: 2.3em;
-                    padding-left: 1em;
-                    padding-right: 1em;
                     margin: 0 auto;
                     background-color: #fff;
                     border: 1px solid var(--corContorno);
-                    border-radius: 0.3em;
-                    z-index: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    flex-wrap: wrap;
-                    position: absolute;
-                    top: 1em;
-                }
-                .subcard8 {
-                    width: 13em;
-                    height: 16em;
-                    padding-top: 3em;
                     padding-left: 1em;
-                    padding-right: 1em;
-                    padding-bottom: 2.5em;
-                    margin: 0 auto;
-                    background-color: #fff;
-                    border: 1px solid var(--corContorno);
                     border-radius: 0.3em;
                     z-index: 1;
                     display: flex;
@@ -1432,24 +1380,7 @@
                     flex-direction: column;
                     flex-wrap: wrap;
                     position: absolute;
-                    top: 16em;
-                }
-                .subcard9 {
-                    width: 13em;
-                    height: 9em;
-                    padding-left: 1em;
-                    background-color: #fff;
-                    border: 1px solid var(--corContorno);
-                    border-radius: 0.3em;
-                    z-index: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    flex-wrap: wrap;
-                    position: absolute;
-                    top: 17em;
-                    left: -0.2em;
+                    top: 10em;
                 }
                 .inputMeta {
                     max-width: 11em;

@@ -150,7 +150,8 @@
                         <!-- Conteúdo principal do site -->
                         <div class="info">
                 ';
-                 if (isset($_GET['partida'])) {
+
+                if (isset($_GET['funcionario'])) {
                     echo "<br/>";
                     echo "<br/>";
                     echo "<div class='card1'>
@@ -270,10 +271,10 @@
                     
                 }
 
-                 echo '
-                    </div>';
-                    if (!isset($_GET['partida']) && !isset($_GET['relatorio'])){
-                            echo '<a href="inicial.php">
+                echo '
+                        </div>
+
+                        <a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
                         </a>';
                         }
@@ -506,21 +507,16 @@
                             include "dadosProducao/producao.php";
                         echo "</div>";
                     echo "</div>";
+                    
                 }
                 echo '
-                        </div>
+                        <div>
 
                         <a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
                         </a>
                     </div>
-                </div>
                 ';
-                echo "
-                        <div class='card2'>
-                            
-                        </div>
-                        ";
 
             }
         ?>

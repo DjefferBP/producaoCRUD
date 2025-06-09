@@ -1492,6 +1492,22 @@
                 .green {
                     background-color: var(--corTerciaria);
                 }
+                .card1 {
+                width: 80vw;
+                max-width: 90em;
+                height: auto;
+                min-height: 20em;
+                margin: 2em auto;
+                background-color: white;
+                border-radius: 8px;
+                z-index: 1;
+                position: relative;
+                top: -5em;
+                left: -18em;
+                box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05);
+                padding: 2vw;
+                border: 1px solid var(--corContorno);
+            }
             }
 
             @media (min-width: 961px) and (max-width: 1279px) {

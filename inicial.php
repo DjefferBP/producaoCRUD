@@ -187,14 +187,24 @@
                         echo "</div>";
                     echo "</div>";
 
-                    echo "<div class='subcard'>";
+                     echo "<div class='chartcard'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/prodgraphs.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='chartcard2'>";
                         echo "<div class='tools'>";
                             echo "<div class='circle'><span class='red box'></span></div>";
                             echo "<div class='circle'><span class='yellow box'></span></div>";
                             echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
-                            include "dadosProducao/prodgraphs.php";
+                            include "dadosProducao/metagraphs.php";
                         echo "</div>";
                     echo "</div>";
 

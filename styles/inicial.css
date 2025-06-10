@@ -1261,7 +1261,7 @@
                     padding: 1em;
                 }
 
-                .subcard {
+                 .chartcard {
                     width: 30em;
                     height: 30em;
                     margin: 0 auto;
@@ -1272,7 +1272,21 @@
                     z-index: 1;
                     position: absolute;
                     top: 19em;
-                    left: -1.5em;
+                    left: -2em;
+                }
+
+                .chartcard2 {
+                    width: 30em;
+                    height: 30em;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                        -0.25rem -0.25rem 1.25rem #ffffff;
+                    border-radius: 0.3em;
+                    z-index: 1;
+                    position: absolute;
+                    top: 19em;
+                    left: 30em;
                 }
 
                 .subcard2 {

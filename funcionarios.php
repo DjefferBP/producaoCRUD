@@ -19,12 +19,14 @@
         $_SESSION['nomesUser'] = [];
         $_SESSION['emailUser'] = [];
     }
-    $nomeTra = json_decode(file_get_contents('jsons/nome.json'), true);
-    $_SESSION['nomeTrabalhador'] = $nomeTra;
-    $emailTra = json_decode(file_get_contents('jsons/email.json'), true);
-    $_SESSION['emailTrabalhador'] = $emailTra;
-    $senhaTra = json_decode(file_get_contents('jsons/senha.json'), true);
-    $_SESSION['senhaTrabalhador'] = $senhaTra;
+    if (!isset($_SESSION['nomeTrabalhador'])){
+        $nomeTra = json_decode(file_get_contents('jsons/nome.json'), true);
+        $_SESSION['nomeTrabalhador'] = $nomeTra;
+        $emailTra = json_decode(file_get_contents('jsons/email.json'), true);
+        $_SESSION['emailTrabalhador'] = $emailTra;
+        $senhaTra = json_decode(file_get_contents('jsons/senha.json'), true);
+        $_SESSION['senhaTrabalhador'] = $senhaTra;
+    }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
         $_SESSION['quantidades'] = $quantidade;
@@ -193,7 +195,7 @@
                             echo "</form>";
                             
                             echo"
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal1'>
+                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'>
                                     <b>Cadastrar novo trabalhador</b>
                                 </button>
                                 <br>
@@ -219,6 +221,7 @@
                                $hr = $_SESSION['horasRegistros'];
                                $hrTrabalho = $_SESSION['horas'];
                                $contagem = count($email);
+
                                 $senhas = json_decode(file_get_contents('jsons/senha.json'), true);
                                 $senha = $senhas;
                                 $usuarios = [];
@@ -226,27 +229,43 @@
                                 for ($i = 0; $i < $contagem; $i++) {
                                     $usuariosFiltrados[] = [
                                         'id' => $i,
-                                        'nome' => $nome[$i],
-                                        'email' => $email[$i],
-                                        'qt' => $qt[$i],
-                                        'preju' => $prejuizo[$i],
-                                        'dia' => $dia[$i],
-                                        'hr' => $hr[$i],
-                                        'hrTrabalho' => $hrTrabalho[$i],
+                                        'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
+                                        'email' => isset($email[$i]) ? $email[$i] : 'N/A',
+                                        'qt' => isset($qt[$i]) ? $qt[$i] : 'N/A',
+                                        'preju' => isset($prejuizo[$i]) ? $prejuizo[$i] : 'N/A',
+                                        'dia' => isset($dia[$i]) ? $dia[$i] : 'N/A',
+                                        'hr' => isset($hr[$i]) ? $hr[$i] : 'N/A',
+                                        'hrTrabalho' => isset($hrTrabalho[$i]) ? $hrTrabalho[$i] : 'N/A',
                                     ];
                                 }
+                                $pesquisa = '';
                                 if (isset($_POST['limpar'])) {
                                     for ($i = 0; $i < $contagem; $i++) {
                                         $usuarios[] = $i;
                                     }
-                                } elseif (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
-                                    $pesquisar = $_POST['pesquisar'];
-                                    for ($i = 0; $i < $contagem; $i++){
-                                           if (stripos($nome[$i], $pesquisar) !== false) {
+                                } if (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
+                                    $pesquisa = $_POST['pesquisar'];
+                                } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
+                                    $pesquisa = $_GET['pesquisar'];
+                                }
+                                if ($pesquisa !== '') {
+                                    for ($i = 0; $i < $contagem; $i++) {
+                                        if (stripos($nome[$i], $pesquisa) !== false) {
                                             $usuarios[] = $i;
+                                            $usuariosFiltrados[] = [
+                                                'id' => $i,
+                                                'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
+                                                'email' => isset($email[$i]) ? $email[$i] : 'N/A',
+                                                'qt' => isset($qt[$i]) ? $qt[$i] : 'N/A',
+                                                'preju' => isset($prejuizo[$i]) ? $prejuizo[$i] : 'N/A',
+                                                'dia' => isset($dia[$i]) ? $dia[$i] : 'N/A',
+                                                'hr' => isset($hr[$i]) ? $hr[$i] : 'N/A',
+                                                'hrTrabalho' => isset($hrTrabalho[$i]) ? $hrTrabalho[$i] : 'N/A',
+                                            ];
                                         }
-                                    } 
-                                } elseif (isset($_GET['ordenar']) && $_GET['ordenar']) {
+                                    }
+                                }
+                                elseif (isset($_GET['ordenar']) && $_GET['ordenar']) {
                                     $ordenar = $_GET['ordenar'];
                                     if ($ordenar == '') {
                                         for ($i = 0; $i < $contagem; $i++) {
@@ -277,22 +296,31 @@
                                     }
                                 }
                                 $usuariosExibidos = [];
-                                
+                                $porPagina = 12;
+                                $paginaAtual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
+                                $inicio = ($paginaAtual - 1) * $porPagina;
+                                if ((isset($_GET['ordenar']) && !empty($usuariosFiltrados))) {
+                                    $usuariosPagina = array_slice($usuariosFiltrados, $inicio, $porPagina);
+                                    $totalPaginas = ceil(count($usuariosFiltrados) / $porPagina);
+                                } else {
+                                    $usuariosPagina = array_slice($usuarios, $inicio, $porPagina);
+                                    $totalPaginas = ceil(count($usuarios) / $porPagina);
+                                }
                                 if ( (isset($_GET['ordenar']) && empty($usuariosFiltrados)) || (!isset($_GET['ordenar']) && empty($usuarios))) {
-                                echo "<tr><td colspan='5'>Nenhum trabalhador encontrado.</td></tr>";
+                                echo "<tr><td colspan='9'>Nenhum trabalhador encontrado.</td></tr>";
                                 }elseif (isset($_GET['ordenar']) && !empty($usuariosFiltrados)) {
-                                    foreach ($usuariosFiltrados as $usuario) {
+                                    foreach ($usuariosPagina as $usuario) {
                                         $idx = $usuario['id']; 
                                         array_push($usuariosExibidos, $idx);
                                         echo "<tr>";
                                         echo "<td>$idx</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['nome']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['email']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['qt']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['preju']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['dia']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['hr']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($usuario['hrTrabalho']) . "</td>";
+                                        echo "<td>" . (isset($usuario['nome']) ? htmlspecialchars($usuario['nome']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['email']) ? htmlspecialchars($usuario['email']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['qt']) ? htmlspecialchars($usuario['qt']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['preju']) ? htmlspecialchars($usuario['preju']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['dia']) ? htmlspecialchars($usuario['dia']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['hr']) ? htmlspecialchars($usuario['hr']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['hrTrabalho']) ? htmlspecialchars($usuario['hrTrabalho']) : 'N/A') . "</td>";
                                         echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#exampleModal$idx'><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='blue' class='bi bi-pencil-square' viewBox='0 0 16 16'>
         <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
         <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
@@ -303,19 +331,35 @@
                                         echo "</tr>";   
                                         
                                     }
+                                    echo "<nav><ul class='pagination justify-content-center'>";
+                                    for ($p = 1; $p <= $totalPaginas; $p++) {
+                                        $active = ($p == $paginaAtual) ? "active" : "";
+                                        $params = "pagina=$p";
+                                        if (isset($_GET['ordenar']) && $_GET['ordenar'] !== "") {
+                                            $params .= "&ordenar=" . urlencode($_GET['ordenar']);
+                                        }
+                                        if (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
+                                            $params .= "&pesquisar=" . urlencode($_POST['pesquisar']);
+                                        } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
+                                            $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
+                                        }
+                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}'>$p</a></li>";
+                                    }
+                                    echo "</ul></nav>";
                                 }  else {
-                                    for ($i = 0; $i < count($usuarios); $i++) {
-                                        $idx = $usuarios[$i];
+                                    for ($i = 0; $i < count($usuariosPagina); $i++) {
+                                        $idx = $usuariosPagina[$i];
                                         array_push($usuariosExibidos, $idx);
                                         echo "<tr>";
                                             echo "<td>$idx</td>";
-                                            echo "<td>" . htmlspecialchars($nome[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($email[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($qt[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($prejuizo[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($dia[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($hr[$idx]) . "</td>";
-                                            echo "<td>" . htmlspecialchars($hrTrabalho[$idx]) . "</td>";
+  
+                                            echo "<td>" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($email[$idx]) ? htmlspecialchars($email[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($qt[$idx]) ? htmlspecialchars($qt[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($prejuizo[$idx]) ? htmlspecialchars($prejuizo[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($dia[$idx]) ? htmlspecialchars($dia[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($hr[$idx]) ? htmlspecialchars($hr[$idx]) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($hrTrabalho[$idx]) ? htmlspecialchars($hrTrabalho[$idx]) : 'N/A') . "</td>";
                                             echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#exampleModal$idx'><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='blue' class='bi bi-pencil-square' viewBox='0 0 16 16'>
             <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
             <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
@@ -325,6 +369,21 @@
                                         echo "</tr>";
                                         
                                     }
+                                    echo "<nav><ul class='pagination justify-content-center'>";
+                                    for ($p = 1; $p <= $totalPaginas; $p++) {
+                                        $active = ($p == $paginaAtual) ? "active" : "";
+                                        $params = "pagina=$p";
+                                        if (isset($_GET['ordenar']) && $_GET['ordenar'] !== "") {
+                                            $params .= "&ordenar=" . urlencode($_GET['ordenar']);
+                                        }
+                                        if (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
+                                            $params .= "&pesquisar=" . urlencode($_POST['pesquisar']);
+                                        } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
+                                            $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
+                                        }
+                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}'>$p</a></li>";
+                                    }
+                                    echo "</ul></nav>";
                                 }
                                 
                                 
@@ -345,19 +404,19 @@
                                                 <form action='editar.php' method='post'>
                                                     <input type='hidden' name='id' value='$idx'/>
                                                     <label class='form-label'>Nome</label>
-                                                    <input value='" . htmlspecialchars($nome[$idx]) . "' class='form-control' type='text' name='nome' required/>
+                                                    <input value='" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : '') . "' class='form-control' type='text' name='nome' required/>
                                                     <br/>
                                                     <label class='form-label'>E-mail</label>
-                                                    <input value='" . htmlspecialchars($email[$idx]) . "' class='form-control' type='email' name='email' required/>
+                                                    <input value='" . (isset($email[$idx]) ? htmlspecialchars($email[$idx]) : '') . "' class='form-control' type='email' name='email' required/>
                                                     <br/>
                                                     <label class='form-label'>Quantidade Produzida</label>
-                                                    <input value='" . htmlspecialchars($qt[$idx]) . "' class='form-control' type='number' name='qtPro' required/>
+                                                    <input value='" . (isset($qt[$idx]) ? htmlspecialchars($qt[$idx]) : 0) . "' class='form-control' type='number' name='qtPro' required/>
                                                     <br/>
                                                     <label class='form-label'>Retrabalho</label>
-                                                    <input value='" . htmlspecialchars($prejuizo[$idx]) . "' class='form-control' type='number' name='preju' required/>
+                                                    <input value='" . (isset($prejuizo[$idx]) ? htmlspecialchars($prejuizo[$idx]) : 0) . "' class='form-control' type='number' name='preju' required/>
                                                     <br/>
                                                     <label class='form-label'>Senha</label>
-                                                    <input value='" . htmlspecialchars($senha[$idx]) . "' class='form-control' minlength='3' type='password' name='senha' required/>
+                                                    <input value='" . (isset($senha[$idx]) ? htmlspecialchars($senha[$idx]) : '') . "' class='form-control' minlength='3' type='password' name='senha' required/>
                                                     <br/>
                                                     <input type='submit' class='btn btn-primary' value='SALVAR'/>
                                                 </form>
@@ -370,28 +429,28 @@
                                 </div>";
                             }
                             echo "
-                                <div class='modal fade' id='exampleModal1' tabindex='-1' aria-labelledby='exampleModalLabel1' aria-hidden='true'>
+                                <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabe' aria-hidden='true'>
                                     <div class='modal-dialog'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
-                                                <h5 class='modal-title' id='exampleModalLabel1'>CADASTRAR USUÁRIO</h5>
+                                                <h5 class='modal-title' id='exampleModalLabel'>CADASTRAR TRABALHADOR</h5>
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                         <div class='modal-body text-start'>
                                             <form action='cadastro.php' method='post'>
                                                 <label class='form-label'>Nome</label>
-                                                <input class='form-control' type='text' name='nome' required placeholder='Digite o seu nome'/>
+                                                <input class='form-control' type='text' name='nome' required placeholder='Digite o nome'/>
                                                 <br/>
                                                 <label class='form-label'>E-mail</label>
-                                                <input class='form-control' type='email' name='email' required placeholder='Digite o seu e-mail'/>
+                                                <input class='form-control' type='email' name='email' required placeholder='Digite o e-mail'/>
                                                 <br/>
                                                 <label class='form-label'>Senha</label>
-                                                <input class='form-control' type='password' name='senha' required placeholder='Digite a sua senha'/>
+                                                <input class='form-control' type='password' name='senha' required placeholder='Digite a senha'/>
                                                 <br/>
                                                 <label class='form-label'>Foto do trabalhador</label>
-                                                <input class='form-control' type='file' name='foto' accept='.png,.jpg,' required/>
+                                                <input class='form-control' type='file' name='foto' accept='.png,.jpg,' />
                                                 <br/>
-                                                <input type='submit' class='btn btn-success' value='CADASTRAR'/>
+                                                <input type='submit' class='btn btn-primary' value='CADASTRAR'/>
                                             </form>
                                         </div>
                                         <div class='modal-footer'>

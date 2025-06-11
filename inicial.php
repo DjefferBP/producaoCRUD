@@ -19,6 +19,7 @@
         $_SESSION['nomesUser'] = [];
         $_SESSION['emailUser'] = [];
     }
+    
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
         $_SESSION['quantidades'] = $quantidade;

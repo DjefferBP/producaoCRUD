@@ -23,6 +23,7 @@
         <div class="masthead">
             <div class="masthead-content text-black">
                 <div class="container-fluid px-4 px-lg-0">
+                    <img src="img/logo.svg" alt="Logo da empresa" class="logo mb-4">
                     <h1 class="fst-italic lh-1 mb-4">Bem vindo de volta ao painel de controle!</h1>
                     <p class="mb-5">Entre e acesse a sua plataforma para poder ver os dados da sua produção</p>
                     <form class="form" method="post" action="login.php">

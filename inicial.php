@@ -185,7 +185,7 @@
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
-                    
+                    //Criando a lógica para filtrar os dados de produção por data
                     if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
                         $dtInicial = $_POST['dataInicial'];
                         $dtFinal = $_POST['dataFinal'];
@@ -470,7 +470,7 @@
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
-                    
+                    //Criando a lógica para filtrar os dados de produção por data
                     if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
                         $dtInicial = $_POST['dataInicial'];
                         $dtFinal = $_POST['dataFinal'];

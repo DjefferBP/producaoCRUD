@@ -150,8 +150,7 @@
                         <!-- Conteúdo principal do site -->
                         <div class="info">
                 ';
-
-                if (isset($_GET['partida'])) {
+                 if (isset($_GET['partida'])) {
                     echo "<br/>";
                     echo "<br/>";
                     echo "<div class='card1'>
@@ -186,11 +185,46 @@
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
-
-                     echo "<div class='chartcard'>";
+                    
+                    if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
+                        $dtInicial = $_POST['dataInicial'];
+                        $dtFinal = $_POST['dataFinal'];
+                        $_SESSION['dataInicial'] = $dtInicial;
+                        $_SESSION['dataFinal'] = $dtFinal;
+                        $nomesTr = $_SESSION['nomesUser'];
+                        $qtger = $_SESSION['quantidades'];                                
+                        $retrabalho = $_SESSION['prejuizos'];
+                        $dia = $_SESSION['datasRegistros'];
+                        $_SESSION['dadosFiltrados'] = [];
+                        $horas = $_SESSION['horas'];
+                        for ($i = 0; $i < count($nomesTr); $i++) {
+                            $dados = [
+                                'nome' => $nomesTr[$i],
+                                'quantidade' => $qtger[$i],
+                                'prejuizo' => $retrabalho[$i],
+                                'dia' => $dia[$i],
+                                'horas' => $horas[$i]
+                            ];
+                            $_SESSION['dadosFiltrados'][] = $dados;
+                        }
+                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
+                            if (empty($dado['dia'])) return false;
+                            $dataTimestamp = DateTime::createFromFormat('d/m/Y', $dado['dia']);
+                            if (!$dataTimestamp) return false;
+                            $dataTimestamp = $dataTimestamp->getTimestamp();
+                            $dtInicialTimestamp = strtotime($dtInicial);
+                            $dtFinalTimestamp = strtotime($dtFinal);  
+                            return ($dataTimestamp >= $dtInicialTimestamp) && ($dataTimestamp <= $dtFinalTimestamp);
+                        });
+                        $_SESSION['dadosNovos'] = [];
+                        $_SESSION['dadosNovos'] = array_values($dadosNovos);
+                        
+                    }
+                    echo "<div class='chartcard'>";
                         echo "<div class='tools'>";
                             echo "<div class='circle'><span class='red box'></span></div>";
                             echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
                             include "dadosProducao/prodgraphs.php";
@@ -204,7 +238,7 @@
                             echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
-                            include "dadosProducao/metagraphs.php";
+                            include "dadosProducao/trabalhograph.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -270,7 +304,7 @@
                     
                 }
 
-                echo '
+                 echo '
                     </div>';
                     if (!isset($_GET['partida']) && !isset($_GET['relatorio'])){
                             echo '<a href="inicial.php">
@@ -285,6 +319,13 @@
                     echo "
                         <div class='card2'>
                             <form method='POST' action='dadosProducao/tolerancia.php'>
+                            <div class='subcard7'>
+                                <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                 <div class='mb-3'>
                                     <label for='exampleInputEmail1' class='form-label'>Edite a tolerância permitida</label>
                                     <br/>
@@ -294,10 +335,17 @@
                                 </div>
 
                                 <button type='submit' class='btn btn-primary'>Atualizar</button>
-                                
+                                </div>
+                            </div>
+                            </div>
                             </form>
-                            <div class='subcard7'>
+                            <div class='subcard8'>
                                 <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                     <h2 class='profile-title' style='font-size: 14px;'>Meta semanal</h2>";
                                     include "dadosProducao/meta.php";
                                     echo "<form method='POST' action='dadosProducao/meta.php'>
@@ -312,13 +360,18 @@
                                 </form>";
                                 echo "</div>
                             </div>
-                            <div class='subcard8'>
+                            <div class='subcard9'>
                                 <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
                                     <h2 class='profile-title' style='font-size: 14px;'>Média da produção</h2>";
                                     include "dadosProducao/mediaProd.php";
                                 echo "</div>
                             </div>
-                            <div class='subcard9'>
+                            <div class='subcard10'>
                                 <div class='card__content'>
                                     ";
                                 echo "</div>
@@ -340,14 +393,15 @@
 
                 if ($id !== false && isset($fotos[$id])) {
                     echo "src='usuarios/" . $fotos[$id] . "'";
-                } else {
+                }
+                 else {
                     echo "src='img/default.png'";
                 }
 
                 echo ' alt="Imagem do usuário">
                                 </div>
                                 <div class="nomeEDisplay">
-                                    <div class="profile-title">Usuário</div>
+                                    <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
                                     <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
@@ -360,7 +414,8 @@
                                 <hr>
                                 <a href="inicial.php">Produção</a>
                                 <hr>
-                                <a href="inicial.php?diaria">Registro Diário</a>
+                                <a href="inicial.php?diaria">Registro diário</a>
+                               
                             </div>
                         </div>
 
@@ -375,8 +430,7 @@
                         <!-- Conteúdo principal do site -->
                         <div class="info">
                 ';
-
-                if (isset($_GET['diaria'])) {
+                 if (isset($_GET['diaria'])) {
                     echo "<div class='card'>
                             <div class='card_content'>
                                 <h2 class='profile-title' style='font-size: 28px;'>Registro</h2>
@@ -416,8 +470,40 @@
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
-
-                    echo "<div class='subcard'>";
+                    
+                    if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
+                        $dtInicial = $_POST['dataInicial'];
+                        $dtFinal = $_POST['dataFinal'];
+                        $_SESSION['dataInicial'] = $dtInicial;
+                        $_SESSION['dataFinal'] = $dtFinal;
+                        $nomesTr = $_SESSION['nomesUser'];
+                        $qtger = $_SESSION['quantidades'];                                
+                        $retrabalho = $_SESSION['prejuizos'];
+                        $dia = $_SESSION['datasRegistros'];
+                        $_SESSION['dadosFiltrados'] = [];
+                        $horas = $_SESSION['horas'];
+                        for ($i = 0; $i < count($nomesTr); $i++) {
+                            $dados = [
+                                'nome' => $nomesTr[$i],
+                                'quantidade' => $qtger[$i],
+                                'prejuizo' => $retrabalho[$i],
+                                'dia' => $dia[$i],
+                                'horas' => $horas[$i]
+                            ];
+                            $_SESSION['dadosFiltrados'][] = $dados;
+                        }
+                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
+                            if (empty($dado['dia'])) return false;
+                            $dataObj = DateTime::createFromFormat('d/m/Y', $dado['dia']);
+                            if (!$dataObj) return false;
+                            $dataStr = $dataObj->format('Y-m-d');
+                            
+                            return ($dataStr >= $dtInicial) && ($dataStr <= $dtFinal);
+                        });
+                        $_SESSION['dadosNovos'] = [];
+                        $_SESSION['dadosNovos'] = array_values($dadosNovos);
+                    }
+                    echo "<div class='chartcard'>";
                         echo "<div class='tools'>";
                             echo "<div class='circle'><span class='red box'></span></div>";
                             echo "<div class='circle'><span class='yellow box'></span></div>";
@@ -425,6 +511,17 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             include "dadosProducao/prodgraphs.php";
+                        echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='chartcard2'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/trabalhograph.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -489,14 +586,81 @@
                     echo "</div>";
                     
                 }
-                echo '
-                        <div>
 
-                        <a href="inicial.php">
+                 echo '
+                    </div>';
+                    if (!isset($_GET['diaria'])){
+                            echo '<a href="inicial.php">
                             <img src="img/logo.svg" class="logo" alt="Logo da empresa">
-                        </a>
-                    </div>
+                        </a>';
+                        }
+                echo '</div>
+                </div>
                 ';
+                
+                if (!isset($_GET['diaria'])) {
+                    echo "
+                        <div class='card2'>
+                            <form method='POST' action='dadosProducao/tolerancia.php'>
+                            <div class='subcard7'>
+                                <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
+                                <div class='mb-3'>
+                                    <label for='exampleInputEmail1' class='form-label'>Edite a tolerância permitida</label>
+                                    <br/>
+                                    <div class='input-group mb-3'>
+                                        <input type='number' min='0' name='editarTolerancia' class='form-control' id='tolerancia' placeholder='Ex: 2' required>
+                                        <span class='input-group-text'>%</span>
+                                </div>
+
+                                <button type='submit' class='btn btn-primary'>Atualizar</button>
+                                </div>
+                            </div>
+                            </div>
+                            </form>
+                            <div class='subcard8'>
+                                <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
+                                    <h2 class='profile-title' style='font-size: 14px;'>Meta semanal</h2>";
+                                    include "dadosProducao/meta.php";
+                                    echo "<form method='POST' action='dadosProducao/meta.php'>
+                                    <div class='mb-3'>
+                                        <label for='exampleInputEmail1' class='form-label'>Edite a sua meta</label>
+                                        <br/>
+                                        <div class='input-group mb-3 inputMeta'>
+                                            <input type='number' min='0' name='editarMeta' class='form-control' id='meta' placeholder='Ex: 1000' required>
+                                            <span class='input-group-text'>Qt</span>
+                                    </div>
+                                    <button type='submit' class='btn btn-primary'>Atualizar</button>
+                                </form>";
+                                echo "</div>
+                            </div>
+                            <div class='subcard9'>
+                                <div class='card__content'>
+                                <div class='tools'>
+                                <div class='circle'><span class='red box'></span></div>
+                                <div class='circle'><span class='yellow box'></span></div>
+                                <div class='circle'><span class='green box'></span></div>
+                                </div>
+                                    <h2 class='profile-title' style='font-size: 14px;'>Média da produção</h2>";
+                                    include "dadosProducao/mediaProd.php";
+                                echo "</div>
+                            </div>
+                            <div class='subcard10'>
+                                <div class='card__content'>
+                                    ";
+                                echo "</div>
+                        </div>
+                        ";
+                }
 
             }
         ?>

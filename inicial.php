@@ -602,46 +602,17 @@
                 if (!isset($_GET['diaria'])) {
                     echo "
                         <div class='card2'>
-                            <form method='POST' action='dadosProducao/tolerancia.php'>
-                            <div class='subcard7'>
-                                <div class='card__content'>
-                                <div class='tools'>
-                                <div class='circle'><span class='red box'></span></div>
-                                <div class='circle'><span class='yellow box'></span></div>
-                                <div class='circle'><span class='green box'></span></div>
-                                </div>
-                                <div class='mb-3'>
-                                    <label for='exampleInputEmail1' class='form-label'>Edite a tolerância permitida</label>
-                                    <br/>
-                                    <div class='input-group mb-3'>
-                                        <input type='number' min='0' name='editarTolerancia' class='form-control' id='tolerancia' placeholder='Ex: 2' required>
-                                        <span class='input-group-text'>%</span>
-                                </div>
-
-                                <button type='submit' class='btn btn-primary'>Atualizar</button>
-                                </div>
-                            </div>
-                            </div>
-                            </form>
+                            
                             <div class='subcard8'>
                                 <div class='card__content'>
-                                <div class='tools'>
-                                <div class='circle'><span class='red box'></span></div>
-                                <div class='circle'><span class='yellow box'></span></div>
-                                <div class='circle'><span class='green box'></span></div>
-                                </div>
+                                    <div class='tools'>
+                                        <div class='circle'><span class='red box'></span></div>
+                                        <div class='circle'><span class='yellow box'></span></div>
+                                        <div class='circle'><span class='green box'></span></div>
+                                    </div>
                                     <h2 class='profile-title' style='font-size: 14px;'>Meta semanal</h2>";
                                     include "dadosProducao/meta.php";
-                                    echo "<form method='POST' action='dadosProducao/meta.php'>
-                                    <div class='mb-3'>
-                                        <label for='exampleInputEmail1' class='form-label'>Edite a sua meta</label>
-                                        <br/>
-                                        <div class='input-group mb-3 inputMeta'>
-                                            <input type='number' min='0' name='editarMeta' class='form-control' id='meta' placeholder='Ex: 1000' required>
-                                            <span class='input-group-text'>Qt</span>
-                                    </div>
-                                    <button type='submit' class='btn btn-primary'>Atualizar</button>
-                                </form>";
+                                    
                                 echo "</div>
                             </div>
                             <div class='subcard9'>

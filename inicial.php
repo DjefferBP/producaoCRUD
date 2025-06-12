@@ -19,7 +19,11 @@
         $_SESSION['nomesUser'] = [];
         $_SESSION['emailUser'] = [];
     }
-    
+    if (!isset($_SESSION['producaoHr']) && file_exists('dadosProducao/producaoHora.json')) {
+        $_SESSION['producaoHr'] = json_decode(file_get_contents('dadosProducao/producaoHora.json'), true);
+    } else{
+        $_SESSION['producaoHr'] = [];
+    }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
         $_SESSION['quantidades'] = $quantidade;
@@ -232,6 +236,7 @@
                         echo "</div>";
                     echo "</div>";
 
+                    
                     echo "<div class='chartcard2'>";
                         echo "<div class='tools'>";
                             echo "<div class='circle'><span class='red box'></span></div>";
@@ -239,7 +244,7 @@
                             echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
-                            include "dadosProducao/trabalhograph.php";
+                            include "dadosProducao/taxProd.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -627,15 +632,13 @@
                                     include "dadosProducao/mediaProd.php";
                                 echo "</div>
                             </div>
-                            <div class='subcard10'>
-                                <div class='card__content'>
-                                    ";
-                                echo "</div>
+                            
                         </div>
                         ";
                 }
 
-            }
+            }echo "<a href='salvar.php'><button class='btn btn-primary'>Salvar dados</button></a>";
+
         ?>
     </main>
 </body>

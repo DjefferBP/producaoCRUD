@@ -26,6 +26,8 @@
         $_SESSION['emailTrabalhador'] = $emailTra;
         $senhaTra = json_decode(file_get_contents('jsons/senha.json'), true);
         $_SESSION['senhaTrabalhador'] = $senhaTra;
+        $fotoTra = json_decode(file_get_contents('jsons/foto.json'), true);
+        $_SESSION['fotoTra'] = $fotoTra;
     }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
@@ -221,7 +223,7 @@
                                $hr = $_SESSION['horasRegistros'];
                                $hrTrabalho = $_SESSION['horas'];
                                $contagem = count($email);
-
+                            
                                 $senhas = json_decode(file_get_contents('jsons/senha.json'), true);
                                 $senha = $senhas;
                                 $usuarios = [];
@@ -343,7 +345,8 @@
                                         } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
                                             $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
                                         }
-                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}'>$p</a></li>";
+                                        $style = ($active === "active") ? "style='background-color: #b95afd; color: black; border-color: black;'" : "style='color: black; border-color: black;'";
+                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}' $style>$p</a></li>";
                                     }
                                     echo "</ul></nav>";
                                 }  else {
@@ -381,7 +384,8 @@
                                         } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
                                             $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
                                         }
-                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}'>$p</a></li>";
+                                        $style = ($active === "active") ? "style='background-color: rgb(214, 156, 255); color: white; border-color: #b95afd;'" : "style='color: black; border-color: rgb(214, 156, 255);'";
+                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}' $style>$p</a></li>";
                                     }
                                     echo "</ul></nav>";
                                 }

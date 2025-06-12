@@ -1,18 +1,10 @@
-{
-    "0": "djeffer@teste.com",
-    "1": "daniel@teste.com",
-    "2": "erinaldo@teste.com",
-    "3": "luiz@teste.com",
-    "6": "amaral@teste.com",
-    "7": "tagre@teste.com",
-    "5": "fiapo@teste.com",
-    "4": "bordo@teste.com",
-    "8": "hh@teste.com",
-    "9": "jh@teste.com",
-    "10": "teste@teste.com",
-    "11": "teste@teste1.com",
-    "12": "teste@teste2.com",
-    "13": "teste@teste3.com",
-    "14": "teste@teste4.com",
-    "15": "teste@teste5.com"
-}
+[
+    "djeffer@teste.com",
+    "luiz@teste.com",
+    "gabriel@teste.com",
+    "daniel@teste.com",
+    "erinaldo@teste.com",
+    "amaral@teste.com",
+    "fiapo@teste.com",
+    "urg@teste.com"
+]

@@ -10,9 +10,7 @@
             exit();
         }
         $diretorio = 'dadosUserjson/';
-        array_push($_SESSION['nomesUser'], $nome);
         array_push($_SESSION['nomeTrabalhador'], $nome);
-        array_push($_SESSION['emailUser'], $email);
         array_push($_SESSION['emailTrabalhador'], $email);
         array_push($_SESSION['senhaTrabalhador'], $senha);
         file_put_contents($diretorio . 'nomesUser.json', json_encode($_SESSION['nomesUser'], JSON_PRETTY_PRINT));

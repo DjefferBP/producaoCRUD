@@ -190,8 +190,6 @@
                                     echo "<option value=''>Ordenar</option>";
                                     echo "<option value='nome'>Por Nome</option>";
                                     echo "<option value='email'>Por E-mail</option>";
-                                    echo "<option value='qt'>Por Quantidade Produzida</option>";
-                                    echo "<option value='preju'>Por Prejuízo</option>";
                                 echo "</select>";
                                 echo "<input type='submit' class='btn btn-primary' value='Ordenar'/>";
                             echo "</form>";
@@ -209,21 +207,11 @@
                                     <th>ID</th>
                                     <th>NOME</th>
                                     <th>E-MAIL</th>
-                                    <th>PRODUÇÃO</th>
-                                    <th>PREJUIZO</th>
-                                    <th>DIA</th>
-                                    <th>HORA</th>
-                                    <th>HORAS TRABALHADAS</th>
+                                    <th>AÇÕES</th>
                                 </tr>";
-                               $email = $_SESSION['emailUser'];
-                               $nome = $_SESSION['nomesUser'];
-                               $qt = $_SESSION['quantidades'];                                
-                               $prejuizo = $_SESSION['prejuizos'];
-                               $dia = $_SESSION['datasRegistros'];
-                               $hr = $_SESSION['horasRegistros'];
-                               $hrTrabalho = $_SESSION['horas'];
+                               $email = $_SESSION['emailTrabalhador'];
+                               $nome = $_SESSION['nomeTrabalhador'];
                                $contagem = count($email);
-                            
                                 $senhas = json_decode(file_get_contents('jsons/senha.json'), true);
                                 $senha = $senhas;
                                 $usuarios = [];
@@ -233,11 +221,6 @@
                                         'id' => $i,
                                         'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
                                         'email' => isset($email[$i]) ? $email[$i] : 'N/A',
-                                        'qt' => isset($qt[$i]) ? $qt[$i] : 'N/A',
-                                        'preju' => isset($prejuizo[$i]) ? $prejuizo[$i] : 'N/A',
-                                        'dia' => isset($dia[$i]) ? $dia[$i] : 'N/A',
-                                        'hr' => isset($hr[$i]) ? $hr[$i] : 'N/A',
-                                        'hrTrabalho' => isset($hrTrabalho[$i]) ? $hrTrabalho[$i] : 'N/A',
                                     ];
                                 }
                                 $pesquisa = '';
@@ -258,11 +241,6 @@
                                                 'id' => $i,
                                                 'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
                                                 'email' => isset($email[$i]) ? $email[$i] : 'N/A',
-                                                'qt' => isset($qt[$i]) ? $qt[$i] : 'N/A',
-                                                'preju' => isset($prejuizo[$i]) ? $prejuizo[$i] : 'N/A',
-                                                'dia' => isset($dia[$i]) ? $dia[$i] : 'N/A',
-                                                'hr' => isset($hr[$i]) ? $hr[$i] : 'N/A',
-                                                'hrTrabalho' => isset($hrTrabalho[$i]) ? $hrTrabalho[$i] : 'N/A',
                                             ];
                                         }
                                     }
@@ -280,15 +258,6 @@
                                     } elseif ($ordenar == 'email'){
                                         usort($usuariosFiltrados, function($a, $b) {
                                             return strcmp($a['email'], $b['email']);
-                                        });
-                                    } elseif ($ordenar == 'preju'){
-                                        usort($usuariosFiltrados, function($a, $b) {
-                                            return strcmp($b['preju'], $a['preju']);
-                                        });
-                                    }
-                                    else{
-                                        usort($usuariosFiltrados, function($a, $b) {
-                                            return strcmp($b['qt'], $a['qt']);
                                         });
                                     }
                                 }
@@ -309,7 +278,7 @@
                                     $totalPaginas = ceil(count($usuarios) / $porPagina);
                                 }
                                 if ( (isset($_GET['ordenar']) && empty($usuariosFiltrados)) || (!isset($_GET['ordenar']) && empty($usuarios))) {
-                                echo "<tr><td colspan='9'>Nenhum trabalhador encontrado.</td></tr>";
+                                echo "<tr><td colspan='3'>Nenhum trabalhador encontrado.</td></tr>";
                                 }elseif (isset($_GET['ordenar']) && !empty($usuariosFiltrados)) {
                                     foreach ($usuariosPagina as $usuario) {
                                         $idx = $usuario['id']; 
@@ -318,11 +287,6 @@
                                         echo "<td>$idx</td>";
                                         echo "<td>" . (isset($usuario['nome']) ? htmlspecialchars($usuario['nome']) : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['email']) ? htmlspecialchars($usuario['email']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['qt']) ? htmlspecialchars($usuario['qt']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['preju']) ? htmlspecialchars($usuario['preju']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['dia']) ? htmlspecialchars($usuario['dia']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['hr']) ? htmlspecialchars($usuario['hr']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['hrTrabalho']) ? htmlspecialchars($usuario['hrTrabalho']) : 'N/A') . "</td>";
                                         echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#exampleModal$idx'><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='blue' class='bi bi-pencil-square' viewBox='0 0 16 16'>
         <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
         <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
@@ -358,11 +322,6 @@
   
                                             echo "<td>" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : 'N/A') . "</td>";
                                             echo "<td>" . (isset($email[$idx]) ? htmlspecialchars($email[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($qt[$idx]) ? htmlspecialchars($qt[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($prejuizo[$idx]) ? htmlspecialchars($prejuizo[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($dia[$idx]) ? htmlspecialchars($dia[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($hr[$idx]) ? htmlspecialchars($hr[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($hrTrabalho[$idx]) ? htmlspecialchars($hrTrabalho[$idx]) : 'N/A') . "</td>";
                                             echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#exampleModal$idx'><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='blue' class='bi bi-pencil-square' viewBox='0 0 16 16'>
             <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
             <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>
@@ -405,7 +364,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                                <form action='editar.php' method='post'>
+                                                <form action='editar.php' method='post' enctype='multipart/form-data'>
                                                     <input type='hidden' name='id' value='$idx'/>
                                                     <label class='form-label'>Nome</label>
                                                     <input value='" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : '') . "' class='form-control' type='text' name='nome' required/>
@@ -413,14 +372,11 @@
                                                     <label class='form-label'>E-mail</label>
                                                     <input value='" . (isset($email[$idx]) ? htmlspecialchars($email[$idx]) : '') . "' class='form-control' type='email' name='email' required/>
                                                     <br/>
-                                                    <label class='form-label'>Quantidade Produzida</label>
-                                                    <input value='" . (isset($qt[$idx]) ? htmlspecialchars($qt[$idx]) : 0) . "' class='form-control' type='number' name='qtPro' required/>
-                                                    <br/>
-                                                    <label class='form-label'>Retrabalho</label>
-                                                    <input value='" . (isset($prejuizo[$idx]) ? htmlspecialchars($prejuizo[$idx]) : 0) . "' class='form-control' type='number' name='preju' required/>
-                                                    <br/>
                                                     <label class='form-label'>Senha</label>
                                                     <input value='" . (isset($senha[$idx]) ? htmlspecialchars($senha[$idx]) : '') . "' class='form-control' minlength='3' type='password' name='senha' required/>
+                                                    <br/>
+                                                    <label class='form-label'>Foto do trabalhador</label>
+                                                    <input class='form-control' type='file' name='fotoTra' accept='.png,.jpg'/>
                                                     <br/>
                                                     <input type='submit' class='btn btn-primary' value='SALVAR'/>
                                                 </form>

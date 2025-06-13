@@ -398,7 +398,7 @@
                                     <img ';
 
                 if ($id !== false && isset($fotos[$id])) {
-                    echo "src='usuarios/" . $fotos[$id] . "'";
+                    echo "src='" . $fotos[$id] . "'";
                 }
                  else {
                     echo "src='img/default.png'";
@@ -528,7 +528,7 @@
                             echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
-                            include "dadosProducao/trabalhograph.php";
+                            include "dadosProducao/taxProd.php";
                         echo "</div>";
                     echo "</div>";
 

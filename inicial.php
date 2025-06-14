@@ -3,6 +3,11 @@
     if (!isset($_SESSION['usuario'])){
         header('Location: index.php');
     }
+    if (!isset($_SESSION['mediaProd']) && file_exists('dadosProducao/mediaProd.json')) {
+        $_SESSION['mediaProd'] = json_decode(file_get_contents('dadosProducao/mediaProd.json'), true);
+    } elseif (!isset($_SESSION['mediaProd'])){
+        $_SESSION['mediaProd'] = [];
+    }
     $diretorioMeta = 'dadosProducao/meta.json';
     if (!isset($_SESSION['meta']) && file_exists($diretorioMeta)) {
         $meta = json_decode(file_get_contents($diretorioMeta), true);
@@ -18,11 +23,6 @@
     } elseif (!isset($_SESSION['nomesUser'])){
         $_SESSION['nomesUser'] = [];
         $_SESSION['emailUser'] = [];
-    }
-    if (!isset($_SESSION['producaoHr']) && file_exists('dadosProducao/producaoHora.json')) {
-        $_SESSION['producaoHr'] = json_decode(file_get_contents('dadosProducao/producaoHora.json'), true);
-    } else{
-        $_SESSION['producaoHr'] = [];
     }
     if (!isset($_SESSION['quantidades'])){
         $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
@@ -125,7 +125,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="salvar.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -305,6 +305,7 @@
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Produção total (com prejuízos)</h2>";
                             include "dadosProducao/producao.php";
+                            print_r($_SESSION['teste']);
                         echo "</div>";
                     echo "</div>";
                     
@@ -637,7 +638,7 @@
                         ";
                 }
 
-            }echo "<a href='salvar.php'><button class='btn btn-primary'>Salvar dados</button></a>";
+            }
 
         ?>
     </main>

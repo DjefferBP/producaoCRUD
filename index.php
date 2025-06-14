@@ -149,10 +149,10 @@
 
             <div class="container-fluid px-4 px-lg-0">
 
-                <img src="img/logo.svg" alt="Logo da empresa" class="logo mb-4">
+                <a href="index.php"><img src="img/logo.svg" alt="Logo da empresa" class="logo mb-4"></a>
 
                 <h1 class="fst-italic lh-1 mb-4">Seja bem-vindo ao painel de controle!</h1>
-                <p class="mb-5">Entre e acesse a sua plataforma para poder ver os dados da sua produção</p>
+                <p class="mb-5">Entre e acesse a sua plataforma para acessar os dados da sua produção</p>
                 <p class="centro line anim-typewriter">
                     <img src="img/ProdGraph.svg" alt="Logo" class="logo-animada" style="vertical-align: right; height: 1.2em; margin-right: 0.1em;">
                     Prodgraph
@@ -160,11 +160,13 @@
                 <form class="form" method="post" action="login.php">
                     <p class="form-title text-purple">Entre na sua conta!</p>
                     <div class="input-container">
-                        <input type="email" placeholder="Digite o E-mail" required name="email">
+                        <input type="email" required name="email" id="nome" placeholder=" ">
+                        <label for="nome">E-mail</label>
                     </div>
 
                     <div class="input-container">
-                        <input type="password" placeholder="Digite a senha" required name="senha" id="pwd">
+                        <input type="password"required name="senha" id="senha" placeholder=" ">
+                        <label for="senha">Senha</label>
                     </div>
                     <input type="submit" value="Entrar" class="submit">
 

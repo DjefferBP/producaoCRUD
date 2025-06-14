@@ -247,6 +247,26 @@
                             include "dadosProducao/taxProd.php";
                         echo "</div>";
                     echo "</div>";
+                    echo "<div class='chartcard3'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/funcionariosProd.php";
+                        echo "</div>";
+                    echo "</div>";
+                    echo "<div class='chartcard4'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/dadosProd.php";
+                        echo "</div>";
+                    echo "</div>";
 
                     echo "<div class='subcard2'>";
                         echo "<div class='tools'>";
@@ -305,7 +325,6 @@
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Produção total (com prejuízos)</h2>";
                             include "dadosProducao/producao.php";
-                            print_r($_SESSION['teste']);
                         echo "</div>";
                     echo "</div>";
                     
@@ -530,6 +549,26 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             include "dadosProducao/taxProd.php";
+                        echo "</div>";
+                    echo "</div>";
+                    echo "<div class='chartcard3'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/funcionariosProd.php";
+                        echo "</div>";
+                    echo "</div>";
+                    echo "<div class='chartcard4'>";
+                        echo "<div class='tools'>";
+                            echo "<div class='circle'><span class='red box'></span></div>";
+                            echo "<div class='circle'><span class='yellow box'></span></div>";
+                            echo "<div class='circle'><span class='green box'></span></div>";
+                        echo "</div>";
+                        echo "<div class='card__content'>";
+                            include "dadosProducao/dadosProd.php";
                         echo "</div>";
                     echo "</div>";
 

@@ -1,53 +1,53 @@
 <?php
     session_start();
     if (!isset($_SESSION['usuario'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
-    $diretorioMeta = 'dadosProducao/meta.json';
+    $diretorioMeta = '../dadosProducao/meta.json';
     if (!isset($_SESSION['meta']) && file_exists($diretorioMeta)) {
         $meta = json_decode(file_get_contents($diretorioMeta), true);
         $_SESSION['meta'] = $meta;
     } elseif (!isset($_SESSION['meta'])) {
         $_SESSION['meta'] = [0]; 
     }
-    if (!isset($_SESSION['nomesUser']) && file_exists('dadosUserjson/emailUser.json')) {
-        $nomesUser = json_decode(file_get_contents('dadosUserjson/nomesUser.json'), true);
+    if (!isset($_SESSION['nomesUser']) && file_exists('../dadosUserjson/emailUser.json')) {
+        $nomesUser = json_decode(file_get_contents('../dadosUserjson/nomesUser.json'), true);
         $_SESSION['nomesUser'] = $nomesUser;
-        $emailUser = json_decode(file_get_contents('dadosUserjson/emailUser.json'), true);
+        $emailUser = json_decode(file_get_contents('../dadosUserjson/emailUser.json'), true);
         $_SESSION['emailUser'] = $emailUser;
     } elseif (!isset($_SESSION['nomesUser'])){
         $_SESSION['nomesUser'] = [];
         $_SESSION['emailUser'] = [];
     }
     if (!isset($_SESSION['nomeTrabalhador'])){
-        $nomeTra = json_decode(file_get_contents('jsons/nome.json'), true);
+        $nomeTra = json_decode(file_get_contents('../jsons/nome.json'), true);
         $_SESSION['nomeTrabalhador'] = $nomeTra;
-        $emailTra = json_decode(file_get_contents('jsons/email.json'), true);
+        $emailTra = json_decode(file_get_contents('../jsons/email.json'), true);
         $_SESSION['emailTrabalhador'] = $emailTra;
-        $senhaTra = json_decode(file_get_contents('jsons/senha.json'), true);
+        $senhaTra = json_decode(file_get_contents('../jsons/senha.json'), true);
         $_SESSION['senhaTrabalhador'] = $senhaTra;
-        $fotoTra = json_decode(file_get_contents('jsons/foto.json'), true);
+        $fotoTra = json_decode(file_get_contents('../jsons/foto.json'), true);
         $_SESSION['fotoTra'] = $fotoTra;
     }
     if (!isset($_SESSION['quantidades'])){
-        $quantidade = json_decode(file_get_contents('dadosUserjson/quantidades.json'), true);
+        $quantidade = json_decode(file_get_contents('../dadosUserjson/quantidades.json'), true);
         $_SESSION['quantidades'] = $quantidade;
-        $prejuizo = json_decode(file_get_contents('dadosUserjson/prejuizos.json'), true);
+        $prejuizo = json_decode(file_get_contents('../dadosUserjson/prejuizos.json'), true);
         $_SESSION['prejuizos'] = $prejuizo;
-        $dataRegistro = json_decode(file_get_contents('dadosUserjson/datasRegistros.json'), true);
+        $dataRegistro = json_decode(file_get_contents('../dadosUserjson/datasRegistros.json'), true);
         $_SESSION['datasRegistros'] = $dataRegistro;
-        $horasRegistros = json_decode(file_get_contents('dadosUserjson/horasRegistros.json'), true);
+        $horasRegistros = json_decode(file_get_contents('../dadosUserjson/horasRegistros.json'), true);
         $_SESSION['horasRegistros'] = $horasRegistros;
-        $diasSemana = json_decode(file_get_contents('dadosUserjson/diasSemanas.json'), true);
+        $diasSemana = json_decode(file_get_contents('../dadosUserjson/diasSemanas.json'), true);
         $_SESSION['diasSemanas'] = $diasSemana;
-        $cargasTrabalhos = json_decode(file_get_contents('dadosUserjson/cargasTrabalhos.json'), true);
+        $cargasTrabalhos = json_decode(file_get_contents('../dadosUserjson/cargasTrabalhos.json'), true);
         $_SESSION['cargasTrabalhos'] = $cargasTrabalhos;
-        $horas = json_decode(file_get_contents('dadosUserjson/horas.json'), true);
+        $horas = json_decode(file_get_contents('../dadosUserjson/horas.json'), true);
         $_SESSION['horas'] = $horas;
     }
-    $emailAdm = json_decode(file_get_contents('jsons/emailadm.json'), true);
+    $emailAdm = json_decode(file_get_contents('../jsons/emailadm.json'), true);
     $idxAdm = array_search($_SESSION['usuario'], $emailAdm);
-    $diretorio = 'dadosProducao/tolerancia.json';
+    $diretorio = '../dadosProducao/tolerancia.json';
         if (!isset($_SESSION['tole']) && file_exists($diretorio)) {
         $tolerancia = json_decode(file_get_contents($diretorio), true);
         $_SESSION['tole'] = $tolerancia;
@@ -56,10 +56,10 @@
     }
     if (!isset($_SESSION['nomes'])) {
         if ($_SESSION['usuario'] == $emailAdm[$idxAdm]){ 
-            $email = json_decode(file_get_contents("jsons/emailadm.json"), true);
-            $senha = json_decode(file_get_contents("jsons/senhaadm.json"), true);
-            $foto = json_decode(file_get_contents("jsons/fotoadm.json"), true);
-            $nome = json_decode(file_get_contents("jsons/nomeadm.json"), true);
+            $email = json_decode(file_get_contents("../jsons/emailadm.json"), true);
+            $senha = json_decode(file_get_contents("../jsons/senhaadm.json"), true);
+            $foto = json_decode(file_get_contents("../jsons/fotoadm.json"), true);
+            $nome = json_decode(file_get_contents("../jsons/nomeadm.json"), true);
             $id = array_search($_SESSION['usuario'], $email); 
             $_SESSION['nomes'] = $nome;
             $_SESSION['emails'] = $email;
@@ -71,10 +71,10 @@
             $fotos = $foto;
         }
         else {
-            $emails = json_decode(file_get_contents("jsons/email.json"), true);
-            $senhas = json_decode(file_get_contents("jsons/senha.json"), true);
-            $fotos = json_decode(file_get_contents("jsons/foto.json"), true);
-            $nomes = json_decode(file_get_contents("jsons/nome.json"), true);
+            $emails = json_decode(file_get_contents("../jsons/email.json"), true);
+            $senhas = json_decode(file_get_contents("../jsons/senha.json"), true);
+            $fotos = json_decode(file_get_contents("../jsons/foto.json"), true);
+            $nomes = json_decode(file_get_contents("../jsons/nome.json"), true);
             $id = array_search($_SESSION['usuario'], $emails);
             $_SESSION['nomes'] = $nomes;
             $_SESSION['emails'] = $emails;
@@ -96,9 +96,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/ProdGraph.ico">
+    <link rel="icon" href="../img/ProdGraph.ico">
     <title>Dashboard da produção</title>
-    <link rel="stylesheet" href="styles/inicial.css">
+    <link rel="stylesheet" href="../styles/inicial.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
@@ -119,10 +119,10 @@
                                     <img ';
 
                 if ($id !== false && isset($fotos[$id])) {
-                    echo "src='usuarios/" . $fotos[$id] . "'";
+                    echo "src='../usuarios/" . $fotos[$id] . "'";
                 }
                  else {
-                    echo "src='img/default.png'";
+                    echo "src='../img/default.png'";
                 }
 
                 echo ' alt="Imagem do usuário">
@@ -130,7 +130,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="../sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -139,13 +139,13 @@
                             <div class="menu-options">
                                 <div class="profile-title">Menu</div>
                                 <hr>
-                                <a href="inicial.php">Produção</a>
+                                <a href="../inicial.php">Produção</a>
                                 <hr>
                                 <a href="funcionarios.php">Funcionários</a>
                                 <hr>
-                                <a href="inicial.php?partida">Partidas</a>
+                                <a href="partidas.php">Partidas</a>
                                 <hr>
-                                <a href="inicial.php?relatorio">Relatórios</a>
+                                <a href="relatorios.php">Relatórios</a>
                             </div>
                         </div>
 
@@ -212,7 +212,7 @@
                                $email = $_SESSION['emailTrabalhador'];
                                $nome = $_SESSION['nomeTrabalhador'];
                                $contagem = count($email);
-                                $senhas = json_decode(file_get_contents('jsons/senha.json'), true);
+                                $senhas = json_decode(file_get_contents('../jsons/senha.json'), true);
                                 $senha = $senhas;
                                 $usuarios = [];
                                 $usuariosFiltrados = [];
@@ -278,7 +278,7 @@
                                     $totalPaginas = ceil(count($usuarios) / $porPagina);
                                 }
                                 if ( (isset($_GET['ordenar']) && empty($usuariosFiltrados)) || (!isset($_GET['ordenar']) && empty($usuarios))) {
-                                echo "<tr><td colspan='3'>Nenhum trabalhador encontrado.</td></tr>";
+                                echo "<tr><td colspan='4'>Nenhum trabalhador encontrado.</td></tr>";
                                 }elseif (isset($_GET['ordenar']) && !empty($usuariosFiltrados)) {
                                     foreach ($usuariosPagina as $usuario) {
                                         $idx = $usuario['id']; 
@@ -397,7 +397,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                         <div class='modal-body text-start'>
-                                            <form action='cadastro.php' method='post'>
+                                            <form action='cadastro.php' method='post' enctype='multipart/form-data'>
                                                 <label class='form-label'>Nome</label>
                                                 <input class='form-control' type='text' name='nome' required placeholder='Digite o nome'/>
                                                 <br/>
@@ -432,9 +432,9 @@
                                     <img ';
 
                 if ($id !== false && isset($fotos[$id])) {
-                    echo "src='usuarios/" . $fotos[$id] . "'";
+                    echo "src='../usuarios/" . $fotos[$id] . "'";
                 } else {
-                    echo "src='img/default.png'";
+                    echo "src='../img/default.png'";
                 }
 
                 echo ' alt="Imagem do usuário">
@@ -442,7 +442,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="../sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -451,9 +451,9 @@
                             <div class="menu-options">
                                 <div class="profile-title">Menu</div>
                                 <hr>
-                                <a href="inicial.php">Produção</a>
+                                <a href="../inicial.php">Produção</a>
                                 <hr>
-                                <a href="inicial.php?diaria">Registro Diário</a>
+                                <a href="../inicial.php?diaria">Registro Diário</a>
                             </div>
                         </div>
 
@@ -496,7 +496,7 @@
                     echo "<div class='card'>
                             <div class='card_content'>
                                 <span class='profile-title' style='font-size: 24px; font-weight: bold;'>Produção</span>";
-                                echo "<form class='dataForm' method='post' action='inicial.php'>";
+                                echo "<form class='dataForm' method='post' action='../inicial.php'>";
                                     echo "<span class='profile-title'><b>Escolha a data inicial</b></span>";
                                     echo "<input type='date' class='data' name='dataInicial'/>";
                                     echo "<span class='profile-title'><b>Escolha a data final</b></span>";
@@ -517,7 +517,7 @@
                             echo "<div class='circle'><span class='green box'></span></div>";
                         echo "</div>";
                         echo "<div class='card__content'>";
-                            include "dadosProducao/prodgraphs.php";
+                            include "../dadosProducao/prodgraphs.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -529,7 +529,7 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Retrabalho</h2>";
-                            include "dadosProducao/retrabalho.php";
+                            include "../dadosProducao/retrabalho.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -541,7 +541,7 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Tolerância</h2>";
-                            include "dadosProducao/tolerancia.php";
+                            include "../dadosProducao/tolerancia.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -553,7 +553,7 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Prejuízo</h2>";
-                            include "dadosProducao/prejuizo.php";
+                            include "../dadosProducao/prejuizo.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -565,7 +565,7 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Trabalhadores</h2>";
-                            include "dadosProducao/trabalhadores.php";
+                            include "../dadosProducao/trabalhadores.php";
                         echo "</div>";
                     echo "</div>";
 
@@ -577,7 +577,7 @@
                         echo "</div>";
                         echo "<div class='card__content'>";
                             echo "<h2 class='profile-title' style='font-size: 14px;'>Produção total (com prejuízos)</h2>";
-                            include "dadosProducao/producao.php";
+                            include "../dadosProducao/producao.php";
                         echo "</div>";
                     echo "</div>";
                     
@@ -586,7 +586,7 @@
                         <div>
 
                         <a href="inicial.php">
-                            <img src="img/logo.svg" class="logo" alt="Logo da empresa">
+                            <img src="../img/logo.svg" class="logo" alt="Logo da empresa">
                         </a>
                     </div>
                 ';

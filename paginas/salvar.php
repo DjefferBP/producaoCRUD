@@ -32,6 +32,6 @@
         $datasProcessadas[] = $dataAtual;
     }
     $_SESSION['mediaProd'] = $mediaProd;
-    $diretorio = 'dadosProducao/';
+    $diretorio = '../dadosProducao/';
     file_put_contents($diretorio . 'mediaProd.json', json_encode($_SESSION['mediaProd'], JSON_PRETTY_PRINT));
-    header('Location: sair.php');
+    header('Location: ../sair.php');

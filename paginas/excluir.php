@@ -45,12 +45,12 @@
             $_SESSION[$arr] = array_values($_SESSION[$arr]);
         }
     }
-    $diretorio = 'jsons/';
+    $diretorio = '../jsons/';
     file_put_contents($diretorio . 'nome.json', json_encode($_SESSION['nomeTrabalhador'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'email.json', json_encode($_SESSION['emailTrabalhador'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'senha.json', json_encode($_SESSION['senhaTrabalhador'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'foto.json', json_encode($_SESSION['fotoTra'], JSON_PRETTY_PRINT));
-    $diretorio = 'dadosUserjson/';
+    $diretorio = '../dadosUserjson/';
     file_put_contents($diretorio . 'quantidades.json', json_encode($_SESSION['quantidades'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'prejuizos.json', json_encode($_SESSION['prejuizos'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'datasRegistros.json', json_encode($_SESSION['datasRegistros'], JSON_PRETTY_PRINT));

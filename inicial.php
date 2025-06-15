@@ -136,11 +136,11 @@
                                 <hr>
                                 <a href="inicial.php">Produção</a>
                                 <hr>
-                                <a href="funcionarios.php">Funcionários</a>
+                                <a href="paginas/funcionarios.php">Funcionários</a>
                                 <hr>
-                                <a href="inicial.php?partida">Partidas</a>
+                                <a href="paginas/partidas.php">Partidas</a>
                                 <hr>
-                                <a href="inicial.php?relatorio">Relatórios</a>
+                                <a href="paginas/relatorios.php">Relatórios</a>
                             </div>
                         </div>
 
@@ -341,8 +341,7 @@
                 </div>
                 ';
                 
-                if (!isset($_GET['partida']) && !isset($_GET['relatorio'])) {
-                    echo "
+                echo "
                         <div class='card2'>
                             <form method='POST' action='dadosProducao/tolerancia.php'>
                             <div class='subcard7'>
@@ -403,7 +402,6 @@
                                 echo "</div>
                         </div>
                         ";
-                }
                 
 
             }
@@ -461,7 +459,7 @@
                             <div class='card_content'>
                                 <h2 class='profile-title' style='font-size: 28px;'>Registro</h2>
                                 <div class='profile-forms'>
-                                     <form method='POST' action='receber-dados.php'>
+                                     <form method='POST' action='paginas/receber-dados.php'>
                                         <div class='mb-3'>
                                             <label for='exampleInputEmail1' class='form-label'>Quantidade Produzida</label>
                                             <input type='number' name='quantidade' min='0' class='form-control' id='seunumero' aria-describedby='numero' required>

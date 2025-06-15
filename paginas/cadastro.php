@@ -16,9 +16,9 @@
                 
                 $novoNome = uniqid('user_') . '.' . $ext;
                 $destino = '../usuarios/' . $novoNome;
-                $destinov1 = '/usuarios/' . $novoNome;
+                $destino2 = 'usuarios/' . $novoNome;
                 if (move_uploaded_file($_FILES['foto']['tmp_name'], $destino)) {
-                    array_push($_SESSION['fotoTra'], $destinov1);
+                    array_push($_SESSION['fotoTra'], $destino2);
                 }else {
                     echo "<script>alert('Erro ao mover o arquivo para a pasta usuarios!');</script>";
                 }

@@ -421,16 +421,16 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                                <form action='editar.php' method='post'>
+                                                <form action='editarProd.php' method='post'>
                                                     <input type='hidden' name='id' value='$idx'/>
                                                     <label class='form-label'>Nome</label>
                                                     <input value='" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : '') . "' class='form-control' type='text' name='nome' required/>
                                                     <br/>
                                                     <label class='form-label'>Produção</label>
-                                                    <input value='" . (isset($quantidade[$idx]) ? htmlspecialchars($quantidade[$idx]) : '') . "' class='form-control' type='quantidade' name='email' required/>
+                                                    <input value='" . (isset($quantidade[$idx]) ? htmlspecialchars($quantidade[$idx]) : '') . "' class='form-control' type='quantidade' name='quantidade' required/>
                                                     <br/>
                                                     <label class='form-label'>Prejuízo</label>
-                                                    <input value='" . (isset($preju[$idx]) ? htmlspecialchars($preju[$idx]) : '') . "' class='form-control' type='prejuio' name='email' required/>
+                                                    <input value='" . (isset($preju[$idx]) ? htmlspecialchars($preju[$idx]) : '') . "' class='form-control' type='prejuio' name='prejuizo' required/>
                                                     <br/>
                                                     <input type='submit' class='btn btn-primary' value='SALVAR'/>
                                                 </form>

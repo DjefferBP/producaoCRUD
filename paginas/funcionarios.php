@@ -190,15 +190,15 @@
                                     echo "<option value='email'>Por E-mail</option>";
                                 echo "</select>";
                                 echo "<input type='submit' class='btn btn-primary' value='Ordenar'/>";
-                            echo "</form>";
+                            
                             
                             echo"
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'>
-                                    <b>Cadastrar novo trabalhador</b>
+                                <button type='button' class='btn btn-primary btncadastro' data-bs-toggle='modal' data-bs-target='#exampleModal'>
+                                    Cadastrar novo trabalhador
                                 </button>
                                 <br>
                                ";
-                               
+                               echo "</form>";
                             
                             echo "<table class='table table-hover text-center'>";
                                 echo "<tr>

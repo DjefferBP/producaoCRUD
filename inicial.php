@@ -210,13 +210,14 @@
                             ];
                             $_SESSION['dadosFiltrados'][] = $dados;
                         }
-                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal){
+                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
                             if (empty($dado['dia'])) return false;
-                            $dataObj = DateTime::createFromFormat('d/m/Y', $dado['dia']);
-                            if (!$dataObj) return false;
-                            $dataStr = $dataObj->format('Y-m-d');
-
-                            return ($dataStr >= $dtInicial) && ($dataStr <= $dtFinal);
+                            $dataTimestamp = DateTime::createFromFormat('d/m/Y', $dado['dia']);
+                            if (!$dataTimestamp) return false;
+                            $dataTimestamp = $dataTimestamp->getTimestamp();
+                            $dtInicialTimestamp = strtotime($dtInicial);
+                            $dtFinalTimestamp = strtotime($dtFinal);  
+                            return ($dataTimestamp >= $dtInicialTimestamp) && ($dataTimestamp <= $dtFinalTimestamp);
                         });
                         $_SESSION['dadosNovos'] = [];
                         $_SESSION['dadosNovos'] = array_values($dadosNovos);
@@ -361,7 +362,7 @@
                             </div>
                             </div>
                             </form>
-                            <div class='subcard8funcionario'>
+                            <div class='subcard8'>
                                 <div class='card__content'>
                                 <div class='tools'>
                                 <div class='circle'><span class='red box'></span></div>
@@ -382,7 +383,7 @@
                                 </form>";
                                 echo "</div>
                             </div>
-                            <div class='subcard9funcionario'>
+                            <div class='subcard9'>
                                 <div class='card__content'>
                                 <div class='tools'>
                                 <div class='circle'><span class='red box'></span></div>
@@ -420,7 +421,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="paginas/salvar.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -489,7 +490,7 @@
                     echo "</div>";
                     //Criando a lógica para filtrar os dados de produção por data
                     
-                   if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
+                        if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
                         $dtInicial = $_POST['dataInicial'];
                         $dtFinal = $_POST['dataFinal'];
                         $_SESSION['dataInicial'] = $dtInicial;
@@ -641,7 +642,7 @@
                     echo "
                         <div class='card2'>
                             
-                            <div class='subcard8'>
+                            <div class='subcard8funcionario'>
                                 <div class='card__content'>
                                     <div class='tools'>
                                         <div class='circle'><span class='red box'></span></div>
@@ -653,7 +654,7 @@
                                     
                                 echo "</div>
                             </div>
-                            <div class='subcard9'>
+                            <div class='subcard9funcionario'>
                                 <div class='card__content'>
                                 <div class='tools'>
                                 <div class='circle'><span class='red box'></span></div>

@@ -32,34 +32,49 @@
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Funcionário', 'Produção', 'Retrabalho'],
-          <?php
-            foreach ($dataPoints as $point) {
-                echo "['".addslashes($point['nome'])."', ".$point['quantidade'].", ".$point['prejuizo']."],";
-            }
-          ?>
-        ]);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Funcionário', 'Produção', 'Retrabalho'],
+      <?php
+        foreach ($dataPoints as $point) {
+            echo "['".addslashes($point['nome'])."', ".$point['quantidade'].", ".$point['prejuizo']."],";
+        }
+      ?>
+    ]);
 
-        var options = {
-          chart: {
-            title: 'Performance dos funcionários',
-            subtitle: 'Top 7 funcionários com maior produção',
-          },
-          bars: 'horizontal'
-        };
+    var options = {
+      title: 'Performance dos funcionários',
+      subtitle: 'Top 7 funcionários com maior produção',
+      bars: 'horizontal',
+      legend: { position: 'top' },
+    };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+    var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+    chart.draw(data, options);
+  }
+</script>
+  <style>
+    @media (min-width: 1440px) and (max-width: 1727px) {
+      #columnchart_material {
+        width: 23em;
+        height: 10em;
       }
-    </script>
+
+    }
+
+    @media (min-width: 1728px) {
+      #columnchart_material {
+        width: 30em;
+        height: 12.5em;
+      }
+    }
+  </style>
   </head>
   <body>
-    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+    <div id="columnchart_material"></div>
   </body>
 </html>

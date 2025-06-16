@@ -15,14 +15,14 @@ if (empty($_SESSION['dadosNovos'])) {
 } else {
   $dadosNovos = $_SESSION['dadosNovos'];
   $dados = [];
-  for ($i = 0; $i < count($quantidade); $i++) {
+  for ($i = 0; $i < count($dadosNovos); $i++) {
     $dados[] = [
       'quantidade' => $dadosNovos[$i]['quantidade'],
       'prejuizo' => $dadosNovos[$i]['prejuizo'],
       'data' => $dadosNovos[$i]['dia'],
     ];
   }
-  $datapt = array_slice($dados, 0, 7);
+  $datapt = array_slice($dados, -8);
 }
 
 ?>
@@ -71,7 +71,7 @@ if (empty($_SESSION['dadosNovos'])) {
     @media (min-width: 1440px) and (max-width: 1727px) {
       #chart_div {
         width: 23em;
-        height: 10em;
+        height: 8.5em;
       }
 
     }

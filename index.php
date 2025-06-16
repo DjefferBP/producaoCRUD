@@ -5,9 +5,6 @@
 
     <style>
         @media (min-width: 1280px) {
-            body {
-                overflow: hidden;
-            }
 
             div.imagem {
                 background-image: url(http://placecage.com/201/80);
@@ -30,9 +27,10 @@
                 width: 0px;
                 margin: auto;
                 border-right: 2px solid transparent;
-                font-size: 230% !important;
+                font-size: 1.5em !important;
                 text-align: center;
                 white-space: nowrap;
+                justify-content: center;
                 overflow: hidden;
             }
 

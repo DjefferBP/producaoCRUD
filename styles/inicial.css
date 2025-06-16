@@ -493,7 +493,9 @@
      }
 
      .chartcard,
-     .chartcard2 {
+     .chartcard2,
+     .chartcard3,
+     .chartcard4 {
          width: 21.5em;
          height: 25em;
          margin: 0 auto;
@@ -506,14 +508,15 @@
 
      }
 
-     .chartcard {
-         left: 3em;
+     .chartcard, .chartcard3 {
          top: 19em;
      }
 
-     .chartcard2 {
+     .chartcard2, .chartcard4 {
          top: 45em;
-         left: 3em;
+     }
+     .chartcard3, .chartcard4 {
+        left: 30em;
      }
 
      .subcard2,
@@ -541,35 +544,35 @@
          width: 14em;
          height: 7em;
          top: 80em;
-         left: 7em;
+         left: 20em;
      }
 
      .subcard3 {
          width: 14em;
          height: 7em;
          top: 88em;
-         left: 7em;
+         left: 20em;
      }
 
      .subcard4 {
          width: 14em;
          height: 7em;
          top: 96em;
-         left: 7em;
+         left: 20em;
      }
 
      .subcard5 {
          width: 14em;
          height: 7em;
          top: 104em;
-         left: 7em;
+         left: 20em;
      }
 
      .subcard6 {
          width: 14em;
          height: 7em;
          top: 112em;
-         left: 7em;
+         left: 20em;
      }
 
      .subcard7 {
@@ -1089,6 +1092,10 @@
              z-index: 1;
              margin: 0 auto;
              margin-right: 40%;
+         }
+
+         .chartcard4 {
+
          }
 
          .tools {
@@ -2186,20 +2193,15 @@
          }
 
          .card1 {
-             width: 70vw;
-             max-width: 90em;
-             height: auto;
-             min-height: 20em;
-             margin: 2em auto;
+             width: 33em;
+             height: 22em;
+             margin-left: -4em;
              background-color: white;
-             border-radius: 8px;
+             border-radius: 0.3em;
              z-index: 1;
-             position: relative;
-             top: -5em;
-             left: -18em;
-             box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05);
-             padding: 2vw;
-             border: 1px solid var(--corContorno);
+             position: absolute;
+             top: 10em;
+             left: 13em;
          }
 
          .card2 {
@@ -2257,8 +2259,8 @@
              border-radius: 0.3em;
              z-index: 1;
              position: absolute;
-             top: 23em;
-             left: 22em;
+             top: 39em;
+             left: 10em;
          }
 
          .chartcard3 {
@@ -2271,8 +2273,8 @@
              border-radius: 0.3em;
              z-index: 1;
              position: absolute;
-             top: 39em;
-             left: 10em;
+             top: 23em;
+             left: 22em;
          }
 
          .chartcard4 {
@@ -2285,7 +2287,7 @@
              border-radius: 0.3em;
              z-index: 1;
              position: absolute;
-             top: 39em;
+             top: 23em;
              left: 22em;
          }
 

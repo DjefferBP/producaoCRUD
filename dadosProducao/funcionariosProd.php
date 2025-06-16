@@ -1,4 +1,5 @@
 <?php
+  if (empty($_SESSION['dadosNovos'])){
     $nomes = $_SESSION['nomesUser'];
     $qt = $_SESSION['quantidades'];
     $prejuizo = $_SESSION['prejuizos'];
@@ -27,7 +28,21 @@
         return $b['quantidade'] - $a['quantidade'];
     });
     
-    $dataPoints = array_slice($dados, 0, 7);
+    $dataPoints = array_slice($dados, -8);
+  } else {
+    $dados = [];
+    for ($i = 0; $i < count($_SESSION['dadosNovos']); $i++){
+      $dados[] = [
+        'nome' => $_SESSION['dadosNovos'][$i]['nome'],
+        'quantidade'=> $_SESSION['dadosNovos'][$i]['quantidade'],
+        'prejuizo'=> $_SESSION['dadosNovos'][$i]['prejuizo'],
+      ];
+    }
+    usort($dados, function($a, $b) {
+      return $b['quantidade'] - $a['quantidade'];
+    });
+    $dataPoints = array_slice($dados, -8);
+  }
 ?>
 <html>
   <head>
@@ -51,9 +66,11 @@
       subtitle: 'Top 7 funcionários com maior produção',
       bars: 'horizontal',
       legend: { position: 'top' },
+      colors:
+      ["#B6E2A1", "#DA6C6C"]
     };
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+    var chart = new google.visualization.BarChart(document.getElementById('columnchart_material'));
     chart.draw(data, options);
   }
 </script>
@@ -61,7 +78,7 @@
     @media (min-width: 1440px) and (max-width: 1727px) {
       #columnchart_material {
         width: 23em;
-        height: 10em;
+        height: 8.5em;
       }
 
     }

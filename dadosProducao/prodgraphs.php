@@ -1,8 +1,20 @@
 <?php
-$quantidade = $_SESSION['quantidades'];
-$somaQt = array_sum($quantidade);
-$retrabalho = $_SESSION['prejuizos'];
-$somaRe = array_sum($retrabalho);
+if (empty($_SESSION['dadosNovos'])){
+  $quantidade = $_SESSION['quantidades'];
+  $somaQt = array_sum($quantidade);
+  $retrabalho = $_SESSION['prejuizos'];
+  $somaRe = array_sum($retrabalho);
+} else {
+  $dado = $_SESSION['dadosNovos'];
+  $qt = [];
+  $preju = [];
+  for ($index = 0; $index < count($dado); $index++) {
+    array_push($qt, $dado[$index]['quantidade']);
+    array_push($preju, $dado[$index]['prejuizo']);
+  }
+  $somaQt = array_sum($qt);
+  $somaRe = array_sum($preju);
+}
 ?>
 
 <html>

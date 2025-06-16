@@ -210,14 +210,13 @@
                             ];
                             $_SESSION['dadosFiltrados'][] = $dados;
                         }
-                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
+                         $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal){
                             if (empty($dado['dia'])) return false;
-                            $dataTimestamp = DateTime::createFromFormat('d/m/Y', $dado['dia']);
-                            if (!$dataTimestamp) return false;
-                            $dataTimestamp = $dataTimestamp->getTimestamp();
-                            $dtInicialTimestamp = strtotime($dtInicial);
-                            $dtFinalTimestamp = strtotime($dtFinal);  
-                            return ($dataTimestamp >= $dtInicialTimestamp) && ($dataTimestamp <= $dtFinalTimestamp);
+                            $dataObj = DateTime::createFromFormat('d/m/Y', $dado['dia']);
+                            if (!$dataObj) return false;
+                            $dataStr = $dataObj->format('Y-m-d');
+
+                            return ($dataStr >= $dtInicial) && ($dataStr <= $dtFinal);
                         });
                         $_SESSION['dadosNovos'] = [];
                         $_SESSION['dadosNovos'] = array_values($dadosNovos);

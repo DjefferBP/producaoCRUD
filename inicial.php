@@ -489,7 +489,7 @@
                     echo "</div>";
                     //Criando a lógica para filtrar os dados de produção por data
                     
-                    if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
+                   if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
                         $dtInicial = $_POST['dataInicial'];
                         $dtFinal = $_POST['dataFinal'];
                         $_SESSION['dataInicial'] = $dtInicial;
@@ -510,16 +510,17 @@
                             ];
                             $_SESSION['dadosFiltrados'][] = $dados;
                         }
-                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
+                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal){
                             if (empty($dado['dia'])) return false;
                             $dataObj = DateTime::createFromFormat('d/m/Y', $dado['dia']);
                             if (!$dataObj) return false;
                             $dataStr = $dataObj->format('Y-m-d');
-                            
+
                             return ($dataStr >= $dtInicial) && ($dataStr <= $dtFinal);
                         });
                         $_SESSION['dadosNovos'] = [];
                         $_SESSION['dadosNovos'] = array_values($dadosNovos);
+                        
                     }
                     echo "<div class='chartcard'>";
                         echo "<div class='tools'>";

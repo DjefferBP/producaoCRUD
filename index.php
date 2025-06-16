@@ -27,7 +27,7 @@
                 width: 0px;
                 margin: auto;
                 border-right: 2px solid transparent;
-                font-size: 300% !important;
+                font-size: 220% !important;
                 text-align: center;
                 white-space: nowrap;
                 justify-content: center;

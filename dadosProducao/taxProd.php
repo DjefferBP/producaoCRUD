@@ -74,8 +74,24 @@ if (!isset($_SESSION['dadosNovos'])) {
     chart.draw(data, options);
   }
   </script>
+    <style>
+    @media (min-width: 1440px) and (max-width: 1727px) {
+      #curve_chart {
+        width: 23em;
+        height: 8em;
+      }
+
+    }
+
+    @media (min-width: 1728px) {
+      #curve_chart {
+        width: 30em;
+        height: 12.5em;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div id="curve_chart" style="width: 30em; height: 12em"></div>
+  <div id="curve_chart"></div>
 </body>
 </html>

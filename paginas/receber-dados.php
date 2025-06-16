@@ -60,9 +60,9 @@
         file_put_contents($diretorio . 'diasSemanas.json', json_encode($_SESSION['diasSemanas'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'cargasTrabalhos.json', json_encode($_SESSION['cargasTrabalhos'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'horas.json', json_encode($_SESSION['horas'], JSON_PRETTY_PRINT));
-        $email = json_decode(file_get_contents("jsons/email.json"), true);
+        $email = json_decode(file_get_contents("../jsons/email.json"), true);
         $id = array_search($_SESSION['usuario'], $email);
-        $nome = json_decode(file_get_contents('jsons/nome.json'), true);
+        $nome = json_decode(file_get_contents('../jsons/nome.json'), true);
         $nomeUser = $nome[$id];
         $emailUser = $email[$id];
         array_push($_SESSION['nomesUser'] , $nomeUser);

@@ -16,7 +16,7 @@
     } else {
         $dadosNovos = $_SESSION['dadosNovos'];
         $dados = [];
-        for ($i = 0; $i < count($quantidade); $i++){
+        for ($i = 0; $i < count($dadosNovos); $i++){
             $dados[] = [
                 'quantidade'=> $dadosNovos[$i]['quantidade'],
                 'prejuizo' => $dadosNovos[$i]['prejuizo'],

@@ -412,9 +412,9 @@ fieldset {
   margin-bottom: 1.2em;
   border: 1px solid #ced4da;
   border-radius: 0.5rem;
-  background: #fff;
   box-shadow: 0 1px 4px rgba(147, 1, 253, 0.04);
   transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+  background: #fff;
 }
 
 .input-container input:focus {

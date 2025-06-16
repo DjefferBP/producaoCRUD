@@ -125,7 +125,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="salvar.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="paginas/salvar.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -210,14 +210,13 @@
                             ];
                             $_SESSION['dadosFiltrados'][] = $dados;
                         }
-                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal) {
+                        $dadosNovos = array_filter($_SESSION['dadosFiltrados'], function($dado) use ($dtInicial, $dtFinal){
                             if (empty($dado['dia'])) return false;
-                            $dataTimestamp = DateTime::createFromFormat('d/m/Y', $dado['dia']);
-                            if (!$dataTimestamp) return false;
-                            $dataTimestamp = $dataTimestamp->getTimestamp();
-                            $dtInicialTimestamp = strtotime($dtInicial);
-                            $dtFinalTimestamp = strtotime($dtFinal);  
-                            return ($dataTimestamp >= $dtInicialTimestamp) && ($dataTimestamp <= $dtFinalTimestamp);
+                            $dataObj = DateTime::createFromFormat('d/m/Y', $dado['dia']);
+                            if (!$dataObj) return false;
+                            $dataStr = $dataObj->format('Y-m-d');
+
+                            return ($dataStr >= $dtInicial) && ($dataStr <= $dtFinal);
                         });
                         $_SESSION['dadosNovos'] = [];
                         $_SESSION['dadosNovos'] = array_values($dadosNovos);
@@ -362,7 +361,7 @@
                             </div>
                             </div>
                             </form>
-                            <div class='subcard8'>
+                            <div class='subcard8funcionario'>
                                 <div class='card__content'>
                                 <div class='tools'>
                                 <div class='circle'><span class='red box'></span></div>
@@ -383,7 +382,7 @@
                                 </form>";
                                 echo "</div>
                             </div>
-                            <div class='subcard9'>
+                            <div class='subcard9funcionario'>
                                 <div class='card__content'>
                                 <div class='tools'>
                                 <div class='circle'><span class='red box'></span></div>
@@ -394,10 +393,6 @@
                                     include "dadosProducao/mediaProd.php";
                                 echo "</div>
                             </div>
-                            <div class='subcard10'>
-                                <div class='card__content'>
-                                    ";
-                                echo "</div>
                         </div>
                         ";
                 

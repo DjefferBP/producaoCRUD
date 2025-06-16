@@ -1,8 +1,8 @@
 <?php
-    $quantidade = $_SESSION['quantidades'];
-    $somaQt = array_sum($quantidade);
-    $retrabalho = $_SESSION['prejuizos'];
-    $somaRe = array_sum($retrabalho);
+  $quantidade = $_SESSION['quantidades'];
+  $somaQt = array_sum($quantidade);
+  $retrabalho = $_SESSION['prejuizos'];
+  $somaRe = array_sum($retrabalho);
 ?>
 
 <html>

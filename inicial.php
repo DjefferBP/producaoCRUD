@@ -139,8 +139,6 @@
                                 <a href="paginas/funcionarios.php">Funcionários</a>
                                 <hr>
                                 <a href="paginas/partidas.php">Partidas</a>
-                                <hr>
-                                <a href="paginas/relatorios.php">Relatórios</a>
                             </div>
                         </div>
 

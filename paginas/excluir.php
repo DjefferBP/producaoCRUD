@@ -14,7 +14,12 @@
         echo "<script>alert('Usuário não encontrado!'); window.location.href='funcionarios.php';</script>";
         exit;
     }
-
+    $fotoAntiga = $_SESSION["fotoTra"][$index] ?? '';
+    $fotoAntiga = preg_replace('/^usuarios[\/\\\\]/', '', $fotoAntiga);
+    $caminho = '../usuarios/' . $fotoAntiga;
+    if ($caminho && file_exists($caminho)) {
+        unlink($caminho);
+    }
     $arraysTrabalhador = ['emailTrabalhador', 'nomeTrabalhador', 'senhaTrabalhador', 'fotoTra'];
     foreach ($arraysTrabalhador as $arr) {
         if (isset($_SESSION[$arr][$index])) {
@@ -60,5 +65,4 @@
     file_put_contents($diretorio . 'emailUser.json', json_encode($_SESSION['emailUser'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'nomesUser.json', json_encode($_SESSION['nomesUser'], JSON_PRETTY_PRINT));
     file_put_contents($diretorio . 'horas.json', json_encode($_SESSION['horas'], JSON_PRETTY_PRINT));
-    echo "<script>alert('Usuário excluído com sucesso!');</script>";
-    echo "<script>window.location.href='funcionarios.php';</script>";
+      echo "<script>alert('Usuário excluído com sucesso!'); window.location.href='funcionarios.php';</script>";

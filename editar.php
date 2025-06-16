@@ -9,7 +9,7 @@
         $nomeAtual = $_SESSION['nomeTrabalhador'][$id];
         if ($_POST['email'] != $emailAtual && in_array($email, $_SESSION['emailTrabalhador'])) {
             echo "<script>alert('Este e-mail já está cadastrado, tente novamente!');</script>";
-            echo "<script>window.location.href='funcionarios.php';</script>";
+            echo "<script>window.location.href='paginas/funcionarios.php';</script>";
             exit();
         }
         $_SESSION['nomeTrabalhador'][$id] = $nome;
@@ -26,9 +26,12 @@
                 $novoNome = uniqid('user_') . '.' . $ext;
                 $destino = 'usuarios/' . $novoNome;
                 if (move_uploaded_file($_FILES['fotoTra']['tmp_name'], $destino)) {
+                    if ($fotoAntiga && file_exists($fotoAntiga) && $fotoAntiga !== $destino) {
+                        unlink($fotoAntiga);
+                    }
                     $_SESSION['fotoTra'][$id] = $destino;
                 }else {
-                        echo "<script>alert('Erro ao mover o arquivo para a pasta usuarios!');</script>";
+                    echo "<script>alert('Erro ao mover o arquivo para a pasta usuarios!');</script>";
                 }
             } else {
                 echo "<script>alert('Tipo de arquivo não permitido! Envie apenas PNG ou JPG.');</script>";
@@ -60,7 +63,7 @@
             }
         }
 
-        $diretorio = '../dadosUserjson/';
+        $diretorio = 'dadosUserjson/';
         file_put_contents($diretorio . 'nomesUser.json', json_encode($_SESSION['nomesUser'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'emailUser.json', json_encode($_SESSION['emailUser'], JSON_PRETTY_PRINT));
         $diretorio = 'jsons/';
@@ -69,7 +72,7 @@
         file_put_contents($diretorio . 'senha.json', json_encode($_SESSION['senhaTrabalhador'], JSON_PRETTY_PRINT));
         file_put_contents($diretorio . 'foto.json', json_encode($_SESSION['fotoTra'], JSON_PRETTY_PRINT));
         echo "<script>alert('Trabalhador editado com sucesso!');</script>";
-        echo "<script>window.location.href='funcionarios.php';</script>";
+        echo "<script>window.location.href='paginas/funcionarios.php';</script>";
     }
 
 ?>

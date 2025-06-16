@@ -144,8 +144,6 @@
                                 <a href="funcionarios.php">Funcionários</a>
                                 <hr>
                                 <a href="partidas.php">Partidas</a>
-                                <hr>
-                                <a href="relatorios.php">Relatórios</a>
                             </div>
                         </div>
 
@@ -185,8 +183,8 @@
                             ";
                             echo "<br>";
                             
-                            echo "<form method='GET' action='funcionarios.php' style='display: flex; gap: 10px; align-items: center;'>";
-                                echo "<select class='form-select' name='ordenar' style='width: auto;'>";
+                            echo "<form method='GET' action='funcionarios.php' style='display: flex; gap: 10px; align-items: center; '>";
+                                echo "<select class='form-select' name='ordenar' style='width: 9.2em;'>";
                                     echo "<option value=''>Ordenar</option>";
                                     echo "<option value='nome'>Por Nome</option>";
                                     echo "<option value='email'>Por E-mail</option>";
@@ -364,7 +362,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                                <form action='editar.php' method='post' enctype='multipart/form-data'>
+                                                <form action='../editar.php' method='post' enctype='multipart/form-data'>
                                                     <input type='hidden' name='id' value='$idx'/>
                                                     <label class='form-label'>Nome</label>
                                                     <input value='" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : '') . "' class='form-control' type='text' name='nome' required/>
@@ -397,7 +395,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                         <div class='modal-body text-start'>
-                                            <form action='cadastro.php' method='post' enctype='multipart/form-data'>
+                                            <form action='../cadastro.php' method='post' enctype='multipart/form-data'>
                                                 <label class='form-label'>Nome</label>
                                                 <input class='form-control' type='text' name='nome' required placeholder='Digite o nome'/>
                                                 <br/>

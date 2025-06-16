@@ -144,8 +144,6 @@
                                 <a href="funcionarios.php">Funcionários</a>
                                 <hr>
                                 <a href="partidas.php">Partidas</a>
-                                <hr>
-                                <a href="relatorios.php">Relatórios</a>
                             </div>
                         </div>
 
@@ -171,7 +169,7 @@
                         <br>
                             <div class='pesquisarUsuario'>
                                 <div class='formProcurar'>
-                                    <form action='funcionarios.php' method='POST' style='display: flex; gap: 10px; align-items: center;'>
+                                    <form action='partidas.php' method='POST' style='display: flex; gap: 10px; align-items: center;'>
                                         <input class='form-control' type='text' name='pesquisar' placeholder='Insira o nome do trabalhador que deseja encontrar' value='" . (isset($_POST['pesquisar']) ? htmlspecialchars($_POST['pesquisar']) : "") . "' />
                                         <input type='submit' class='btn btn-primary' value='Buscar'/>
                                         ";
@@ -185,11 +183,12 @@
                             ";
                             echo "<br>";
                             
-                            echo "<form method='GET' action='funcionarios.php' style='display: flex; gap: 10px; align-items: center;'>";
+                            echo "<form method='GET' action='partidas.php' style='display: flex; gap: 10px; align-items: center;'>";
                                 echo "<select class='form-select' name='ordenar' style='width: auto;'>";
                                     echo "<option value=''>Ordenar</option>";
                                     echo "<option value='nome'>Por Nome</option>";
-                                    echo "<option value='email'>Por E-mail</option>";
+                                    echo "<option value='prod'>Por Produção</option>";
+                                    echo "<option value='preju'>Por Prejuizo</option>";
                                 echo "</select>";
                                 echo "<input type='submit' class='btn btn-primary' value='Ordenar'/>";
                             echo "</form>";
@@ -225,18 +224,18 @@
                                 for ($i = 0; $i < $contagem; $i ++) {
                                     $qt = $quantidade[$i];
                                     $hora = $horas[$i] * 60;
-                                    if ($diasSemana[$i] == 0){
+                                    if ($diasSemana[$i] == "0"){
                                         $dia = "Domingo";
-                                    } elseif ( $diasSemana[$i] == 1){
-                                        $dia = "Segunda-Feira";
-                                    } elseif ( $diasSemana[$i] == 2){
-                                        $dia = "Terça-Feira";
-                                    } elseif ( $diasSemana[$i] == 3){
-                                        $dia = "Quarta-Feira";
-                                    } elseif ($diasSemana[$i] == 4){
-                                        $dia = "Quinta-Feira";
-                                    } elseif ( $diasSemana[$i] == 5){
-                                        $dia = "Sexta-Feira";
+                                    } elseif ( $diasSemana[$i] == "1"){
+                                        $dia = "Segunda";
+                                    } elseif ( $diasSemana[$i] == "2"){
+                                        $dia = "Terça";
+                                    } elseif ( $diasSemana[$i] == "3"){
+                                        $dia = "Quarta";
+                                    } elseif ($diasSemana[$i] == "4"){
+                                        $dia = "Quinta";
+                                    } elseif ( $diasSemana[$i] == "5"){
+                                        $dia = "Sexta";
                                     } else {
                                         $dia = "Sábado";
                                     }
@@ -253,7 +252,7 @@
                                         'id' => $i,
                                         'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
                                         'quantidade' => isset($quantidade[$i]) ? $quantidade[$i] : 'N/A',
-                                        'prejuizo' => isset($prejuizo[$i]) ? $prejuizo[$i] : 'N/A',
+                                        'prejuizo' => isset($preju[$i]) ? $preju[$i] : 'N/A',
                                         'mediaHr' => isset($dadosUser[$i]['mediaHora']) ? $dadosUser[$i]['mediaHora'] : 'N/A',
                                         'horasRegistro' => isset($horasRegistros[$i]) ? $horasRegistros[$i] : 'N/A',
                                         'datasRegistros' => isset($datasTrabalho[$i]) ? $datasTrabalho[$i] : 'N/A',
@@ -269,17 +268,23 @@
                                     }
                                 } if (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
                                     $pesquisa = $_POST['pesquisar'];
-                                } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
-                                    $pesquisa = $_GET['pesquisar'];
                                 }
                                 if ($pesquisa !== '') {
+                                    $usuariosFiltrados = []; 
                                     for ($i = 0; $i < $contagem; $i++) {
                                         if (stripos($nome[$i], $pesquisa) !== false) {
                                             $usuarios[] = $i;
                                             $usuariosFiltrados[] = [
                                                 'id' => $i,
                                                 'nome' => isset($nome[$i]) ? $nome[$i] : 'N/A',
-                                                'email' => isset($email[$i]) ? $email[$i] : 'N/A',
+                                                'quantidade' => isset($quantidade[$i]) ? $quantidade[$i] : 'N/A',
+                                                'prejuizo' => isset($preju[$i]) ? $preju[$i] : 'N/A',
+                                                'mediaHr' => isset($dadosUser[$i]['mediaHora']) ? $dadosUser[$i]['mediaHora'] : 'N/A',
+                                                'horasRegistro' => isset($horasRegistros[$i]) ? $horasRegistros[$i] : 'N/A',
+                                                'datasRegistros' => isset($datasTrabalho[$i]) ? $datasTrabalho[$i] : 'N/A',
+                                                'cargasTrabalho' => isset($cargasTrabalhos[$i]) ? $cargasTrabalhos[$i] : 'N/A',
+                                                'dia' => isset($dadosUser[$i]['diaSemana']) ? $dadosUser[$i]['diaSemana'] : "N/A",
+                                                'horas' => isset($horas[$i]) ? $horas[$i] : 'N/A',
                                             ];
                                         }
                                     }
@@ -294,9 +299,13 @@
                                         usort($usuariosFiltrados, function($a, $b) {
                                             return strcmp($a['nome'], $b['nome']);
                                         });
-                                    } elseif ($ordenar == 'email'){
+                                    } elseif ($ordenar == 'prod'){
                                         usort($usuariosFiltrados, function($a, $b) {
-                                            return strcmp($a['email'], $b['email']);
+                                            return strcmp($a['quantidade'], $b['quantidade']);
+                                        });
+                                    } else {
+                                        usort($usuariosFiltrados, function($a, $b){
+                                            return strcmp($a['prejuizo'], $b['prejuizo']);
                                         });
                                     }
                                 }
@@ -327,7 +336,7 @@
                                         echo "<td>" . (isset($usuario['nome']) ? htmlspecialchars($usuario['nome']) : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['quantidade']) ? htmlspecialchars($usuario['quantidade']) : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['prejuizo']) ? htmlspecialchars($usuario['prejuizo']) : 'N/A') . "</td>";
-                                        echo "<td>" . (isset($usuario['mediaHr']) ? htmlspecialchars($usuario['mediaHr']) : 'N/A') . "</td>";
+                                        echo "<td>" . (isset($usuario['mediaHr']) ? htmlspecialchars($usuario['mediaHr']). " sapatos/min" : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['horasRegistro']) ? htmlspecialchars($usuario['horasRegistro']) : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['datasRegistros']) ? htmlspecialchars($usuario['datasRegistros']) : 'N/A') . "</td>";
                                         echo "<td>" . (isset($usuario['cargasTrabalho']) ? htmlspecialchars($usuario['cargasTrabalho']) : 'N/A') . "</td>";
@@ -370,7 +379,7 @@
                                             echo "<td>" . (isset($horasRegistros[$idx]) ? htmlspecialchars($horasRegistros[$idx]) : 'N/A') . "</td>";
                                             echo "<td>" . (isset($datasTrabalho[$idx]) ? htmlspecialchars($datasTrabalho[$idx]) : 'N/A') . "</td>";
                                             echo "<td>" . (isset($cargasTrabalhos[$idx]) ? htmlspecialchars($cargasTrabalhos[$idx]) : 'N/A') . "</td>";
-                                            echo "<td>" . (isset($dadosUser[$idx]['dia']) ? htmlspecialchars($dadosUser[$idx]['dia']) : 'N/A') . "</td>";
+                                            echo "<td>" . (isset($dadosUser[$idx]['diaSemana']) ? htmlspecialchars($dadosUser[$idx]['diaSemana']) : 'N/A') . "</td>";
                                             echo "<td>" . (isset($horas[$idx]) ? htmlspecialchars($horas[$idx]) : 'N/A') . "</td>";
                                             echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#exampleModal$idx'><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='blue' class='bi bi-pencil-square' viewBox='0 0 16 16'>
             <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
@@ -391,7 +400,7 @@
                                         } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
                                             $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
                                         }
-                                        $style = ($active === "active") ? "style='background-color: rgb(214, 156, 255); color: white; border-color: #b95afd;'" : "style='color: black; border-color: rgb(214, 156, 255);'";
+                                        $style = ($active === "active") ? "style='background-color: #b95afd; color: black; border-color: black;'" : "style='color: black; border-color: black;'";
                                         echo "<li class='page-item $active'><a class='page-link' href='?{$params}' $style>$p</a></li>";
                                     }
                                     echo "</ul></nav>";
@@ -417,8 +426,11 @@
                                                     <label class='form-label'>Nome</label>
                                                     <input value='" . (isset($nome[$idx]) ? htmlspecialchars($nome[$idx]) : '') . "' class='form-control' type='text' name='nome' required/>
                                                     <br/>
-                                                    <label class='form-label'>E-mail</label>
-                                                    <input value='" . (isset($email[$idx]) ? htmlspecialchars($email[$idx]) : '') . "' class='form-control' type='email' name='email' required/>
+                                                    <label class='form-label'>Produção</label>
+                                                    <input value='" . (isset($quantidade[$idx]) ? htmlspecialchars($quantidade[$idx]) : '') . "' class='form-control' type='quantidade' name='email' required/>
+                                                    <br/>
+                                                    <label class='form-label'>Prejuízo</label>
+                                                    <input value='" . (isset($preju[$idx]) ? htmlspecialchars($preju[$idx]) : '') . "' class='form-control' type='prejuio' name='email' required/>
                                                     <br/>
                                                     <input type='submit' class='btn btn-primary' value='SALVAR'/>
                                                 </form>

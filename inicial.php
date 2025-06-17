@@ -83,6 +83,39 @@
         $fotos = $_SESSION['fotos'];
         $senhas = $_SESSION['senhas'];
     }
+    $diasRegistros = $_SESSION['datasRegistros'];
+    $qt = $_SESSION['quantidades'];
+    $horasTra = $_SESSION['horas'];
+    $mediaProd = [];
+    $datasProcessadas = [];
+    for ($i = 0; $i < count($qt); $i++) {
+        $dataAtual = $diasRegistros[$i];
+
+        if (in_array($dataAtual, $datasProcessadas)) {
+            continue;
+        }
+
+        $totalQt = 0;
+        $totalHoras = 0;
+        for ($j = 0; $j < count($qt); $j++) {
+            if ($diasRegistros[$j] == $dataAtual) {
+                $totalQt += $qt[$j];
+                $totalHoras += $horasTra[$j];
+            }
+        }
+
+        $somaHora = $totalHoras * 60;
+        $mediaHoras = $somaHora > 0 ? $totalQt / $somaHora : 0;
+
+        $mediaProd[] = [
+            'data' => $dataAtual,
+            'media' => $mediaHoras
+        ];
+        $datasProcessadas[] = $dataAtual;
+    }
+    $_SESSION['mediaProd'] = $mediaProd;
+    $diretorio = 'dadosProducao/';
+    file_put_contents($diretorio . 'mediaProd.json', json_encode($_SESSION['mediaProd'], JSON_PRETTY_PRINT));
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +158,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="paginas/salvar.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -408,19 +441,19 @@
                                 <div class="profile-image profile-image-placeholder">
                                     <img ';
 
-                if ($id !== false && isset($fotos[$id])) {
-                    echo "src='" . $fotos[$id] . "'";
-                }
-                 else {
-                    echo "src='img/default.png'";
-                }
+                                        if ($id !== false && isset($fotos[$id])) {
+                                            echo "src='" . $fotos[$id] . "'";
+                                        }
+                                        else {
+                                            echo "src='img/default.png'";
+                                        }
 
-                echo ' alt="Imagem do usuário">
+                                        echo ' alt="Imagem do usuário">
                                 </div>
-                                <div class="nomeEDisplay">
+                                <div class="nomeEDisplay">  
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="paginas/salvar.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>

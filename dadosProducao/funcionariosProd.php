@@ -62,12 +62,23 @@
     ]);
 
     var options = {
+      chart: {
       title: 'Performance dos funcionários',
       subtitle: 'Top 7 funcionários com maior produção',
+      },
       bars: 'horizontal',
-      legend: { position: 'top' },
-      colors:
-      ["#B6E2A1", "#DA6C6C"]
+      legend: { position: 'top', textStyle: { fontSize: 15 } },
+      colors: ["#B6E2A1", "#DA6C6C"],
+      titleTextStyle: { fontSize: 22 },
+      subtitleTextStyle: { fontSize: 22 },
+      hAxis: {
+      title: 'Produção',
+      titleTextStyle: { fontSize: 16 }
+      },
+      vAxis: {
+      title: 'Funcionário',
+      titleTextStyle: { fontSize: 16 }
+      }
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('columnchart_material'));

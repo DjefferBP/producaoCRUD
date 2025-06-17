@@ -130,7 +130,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title usuarioTitulo">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="salvar.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="../sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>
@@ -465,7 +465,7 @@
                                 <div class="nomeEDisplay">
                                     <div class="profile-title">Usuário</div>
                                     <p class="profile-name">' . (isset($nomes[$id]) ? $nomes[$id] : "Usuário não identificado") . '</p>
-                                    <a href="salvar.php"><button class="btn-danger sair">Sair</button></a>
+                                    <a href="../sair.php"><button class="btn-danger sair">Sair</button></a>
                                 </div>
                             </div>
                         </div>

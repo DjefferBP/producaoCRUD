@@ -52,15 +52,28 @@ if (empty($_SESSION['dadosNovos'])) {
         hAxis: {
           title: 'Datas',
           titleTextStyle: {
-            color: '#333'
+        color: '#333',
+        fontSize: 16
+          },
+          textStyle: {
+        fontSize: 14
           }
         },
         vAxis: {
-          minValue: 0
+          minValue: 0,
+          textStyle: {
+        fontSize: 14
+          }
         },
         legend: {
-          position: 'top'
+          position: 'top',
+          textStyle: {
+        fontSize: 14
+          }
         },
+        titleTextStyle: {
+          fontSize: 18
+        }
       };
 
       var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));

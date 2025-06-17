@@ -261,7 +261,7 @@
                                         'horas' => isset($horas[$i]) ? $horas[$i] : 'N/A',
                                     ];
                                 }
-                                $pesquisa = '';
+                                $pesquisa = isset($_GET['pesquisar']) ? $_GET['pesquisar'] : '';
                                 if (isset($_POST['limpar'])) {
                                     for ($i = 0; $i < $contagem; $i++) {
                                         $usuarios[] = $i;
@@ -350,22 +350,7 @@
                                         echo "</tr>";   
                                         
                                     }
-                                    echo "<nav><ul class='pagination justify-content-center'>";
-                                    for ($p = 1; $p <= $totalPaginas; $p++) {
-                                        $active = ($p == $paginaAtual) ? "active" : "";
-                                        $params = "pagina=$p";
-                                        if (isset($_GET['ordenar']) && $_GET['ordenar'] !== "") {
-                                            $params .= "&ordenar=" . urlencode($_GET['ordenar']);
-                                        }
-                                        if (isset($_POST['pesquisar']) && $_POST['pesquisar'] !== "") {
-                                            $params .= "&pesquisar=" . urlencode($_POST['pesquisar']);
-                                        } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
-                                            $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
-                                        }
-                                        $style = ($active === "active") ? "style='background-color: #b95afd; color: black; border-color: black;'" : "style='color: black; border-color: black;'";
-                                        echo "<li class='page-item $active'><a class='page-link' href='?{$params}' $style>$p</a></li>";
-                                    }
-                                    echo "</ul></nav>";
+                                    
                                 }  else {
                                     for ($i = 0; $i < count($usuariosPagina); $i++) {
                                         $idx = $usuariosPagina[$i];
@@ -388,7 +373,12 @@
                                         echo "</tr>";
                                         
                                     }
-                                    echo "<nav><ul class='pagination justify-content-center'>";
+                                    
+                                }
+                                
+                                
+                            echo "</table>";
+                            echo "<nav><ul class='pagination justify-content-center'>";
                                     for ($p = 1; $p <= $totalPaginas; $p++) {
                                         $active = ($p == $paginaAtual) ? "active" : "";
                                         $params = "pagina=$p";
@@ -400,14 +390,10 @@
                                         } elseif (isset($_GET['pesquisar']) && $_GET['pesquisar'] !== "") {
                                             $params .= "&pesquisar=" . urlencode($_GET['pesquisar']);
                                         }
-                                        $style = ($active === "active") ? "style='background-color: #b95afd; color: black; border-color: black;'" : "style='color: black; border-color: black;'";
+                                        $style = ($active === "active") ? "style='background-color: #b95afd; color: white; border-color: #9301fd;'" : "style='color: #9301fd; border-color: ;'";
                                         echo "<li class='page-item $active'><a class='page-link' href='?{$params}' $style>$p</a></li>";
                                     }
                                     echo "</ul></nav>";
-                                }
-                                
-                                
-                            echo "</table>";
                         echo "</div>"; 
                         
                     echo "</div>";

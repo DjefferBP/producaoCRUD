@@ -225,8 +225,6 @@
                     if (!empty($_POST['dataInicial']) && !empty($_POST['dataFinal'])) {
                         $dtInicial = $_POST['dataInicial'];
                         $dtFinal = $_POST['dataFinal'];
-                        $_SESSION['dataInicial'] = $dtInicial;
-                        $_SESSION['dataFinal'] = $dtFinal;
                         $nomesTr = $_SESSION['nomesUser'];
                         $qtger = $_SESSION['quantidades'];                                
                         $retrabalho = $_SESSION['prejuizos'];

@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['dadosNovos'])) {
+if (empty($_SESSION['dadosNovos'])) {
     $mediaProd = $_SESSION['mediaProd'];
     $reg = count($mediaProd);
     $max = 7;
@@ -13,7 +13,7 @@ if (!isset($_SESSION['dadosNovos'])) {
             ];
         }
     }
-    $dataPoints = array_reverse($dataPoints);
+    $data = array_slice($dataPoints, -8);
 } else {
     $datasProcessadas = [];
     foreach ($_SESSION['dadosNovos'] as $dado) {
@@ -34,6 +34,7 @@ if (!isset($_SESSION['dadosNovos'])) {
         }
         $dataPoints[] = ['data' => $data, 'media' => $media];
     }
+    $data = array_slice($dataPoints, -8);
 }
 ?>
 <html>
@@ -47,8 +48,8 @@ if (!isset($_SESSION['dadosNovos'])) {
     var data = google.visualization.arrayToDataTable([
       ['Data', 'Taxa de Produção'],
       <?php
-      foreach ($dataPoints as $point) {
-          echo "['".$point['data']."', ".round($point['media'], 2)."],";
+      foreach ($data as $point) {
+        echo "['".$point['data']."', ".round($point['media'], 2)."],";
       }
       ?>
     ]);

@@ -1956,6 +1956,7 @@
              background-color: var(--corFundo);
              margin: 0;
              padding: 0;
+             overflow-x: hidden;
          }
 
          .usuarioDiv {
@@ -2021,7 +2022,7 @@
              display: flex;
              flex-direction: row;
              gap: 1.5em;
-             align-items: flex-start;
+             align-items: center;
          }
 
          .nomeEDisplay {
@@ -2036,6 +2037,7 @@
              font-size: 0.8em;
              font-weight: 600;
              color: #1a1a1a;
+             margin-bottom: 0.25em;
          }
 
          .profile-title {
@@ -2113,18 +2115,13 @@
              left: 5em;
          }
 
-         .dataForm .data {
-             margin-left: 1em;
-             margin-right: 1em;
-         }
-
          .logo {
              margin: 1em 2em 0 0;
-             width: 15em;
+             width: 10em;
              height: auto;
              position: absolute;
              top: 5%;
-             right: 2%;
+             right: -2%;
          }
 
          header {
@@ -2210,13 +2207,7 @@
              align-items: center;
              justify-content: flex-end;
              width: 15vw;
-             min-width: 2rem;
-         }
-
-         .logo {
-             width: 15rem;
-             height: auto;
-             right: -1%;
+             min-width: 120px;
          }
 
          .sobre-card {
@@ -2269,7 +2260,6 @@
              flex-direction: column;
              gap: 0;
              height: 100vh;
-             width: 100%;
          }
 
          .sobre-card {
@@ -2281,8 +2271,8 @@
 
          .info {
              position: absolute;
-             left: 25%;
-             top: 4%;
+             left: 30%;
+             top: 50px;
          }
 
          .info h1 {
@@ -2301,317 +2291,193 @@
              float: right;
          }
 
-
-         .card {
-             width: 33em;
-             height: 22em;
-             margin-left: -4em;
-             background-color: white;
-             border-radius: 0.3em;
-             z-index: 1;
-             position: absolute;
-             top: 10em;
-             left: 13em;
+         .subcard2,
+         .subcard3,
+         .subcard4,
+         .subcard5,
+         .subcard6,
+         .subcard7,
+         .subcard8,
+         .subcard8funcionario,
+         .subcard9,
+         .subcard9funcionario {
+             left: 37vw;
          }
 
-         .card1 {
-             width: 33em;
-             height: 22em;
-             margin-left: -4em;
-             background-color: white;
+         .chartcard,
+         .chartcard2,
+         .chartcard3,
+         .chartcard4 {
+             width: 18em;
+             height: 15em;
+             margin: 0 auto;
+             background-color: #fff;
+             box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
+                 -0.25rem -0.25rem 1.25rem #ffffff;
              border-radius: 0.3em;
              z-index: 1;
              position: absolute;
-             top: 10em;
-             left: 13em;
-         }
 
-         .card2 {
-             width: 65em;
-             border: 1px solid var(--corContorno);
-             height: 10em;
-             margin-left: -6em;
-             background-color: white;
-             border-radius: 0.3em;
-             z-index: 1;
-             position: absolute;
-             left: 11%;
-             top: 35em;
-             padding: 1em;
          }
 
          .chartcard {
-             width: 10em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                 -0.25rem -0.25rem 1.25rem #ffffff;
-             border-radius: 0.3em;
-             z-index: 1;
-             position: absolute;
-             top: 21em;
-             left: 15em;
+            top: 20em;
+            left: 7em;
          }
 
          .chartcard2 {
-             width: 10em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                 -0.25rem -0.25rem 1.25rem #ffffff;
-             border-radius: 0.3em;
-             z-index: 1;
-             position: absolute;
-             top: 21em;
-             left: 28em;
+            top: 20em;
+            left: 27em;
          }
 
          .chartcard3 {
-             width: 10em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                 -0.25rem -0.25rem 1.25rem #ffffff;
-             border-radius: 0.3em;
-             z-index: 1;
-             position: absolute;
-             top: 27em;
-             left: 15em;
+            top: 37em;
+            left: 7em;
          }
 
          .chartcard4 {
-             width: 10em;
-             height: 5em;
-             margin: 0 auto;
+            top: 37em;
+            left: 27em;
+         }
+
+         .card {
+             width: 45em;
+             height: 50em;
+             margin-left: -14em;
+             background-color: white;
+             border-radius: 8px;
+             z-index: 1;
+             position: absolute;
+             left: 25%;
+         }
+
+         .card1 {
+             width: 45em;
+             height: 50em;
+             margin-left: -14em;
+             background-color: white;
+             border-radius: 8px;
+             z-index: 1;
+             position: absolute;
+             left: 25%;
+         }
+
+         .card2 {
+             width: 45em;
+             height: 15em;
+             margin-left: -14em;
+             background-color: white;
+             border: 1px solid var(--corContorno);
+             border-radius: 8px;
+             z-index: 1;
+             position: absolute;
+             top: 61em;
+             left: 55%;
+         }
+
+         .subcard2,
+         .subcard3,
+         .subcard4,
+         .subcard5,
+         .subcard6,
+         .subcard7,
+         .subcard8,
+         .subcard8funcionario,
+         .subcard9,
+         .subcard9funcionario {
              background-color: #fff;
-             box-shadow: 0.25rem 0.25rem 1.25rem #bebebe,
-                 -0.25rem -0.25rem 1.25rem #ffffff;
+             border: 1px solid var(--corContorno);
              border-radius: 0.3em;
              z-index: 1;
              position: absolute;
-             top: 27em;
-             left: 28em;
+             display: flex;
+             flex-direction: column;
+             box-sizing: border-box;
+             width: 7em;
+             height: 7em;
          }
-
          .subcard2 {
-             width: 9em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             padding-left: 1em;
-             border-radius: 0.3em;
-             z-index: 1;
-             margin-bottom: 1em;
-             display: flex;
-             flex-direction: column;
-             position: absolute;
-             top: -0.5em;
-             left: 9em;
+            top: -2em;
+            left: 6em;
          }
-
          .subcard3 {
-             width: 9em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             padding-left: 1em;
-             border-radius: 0.3em;
-             z-index: 1;
-             margin-bottom: 1em;
-             display: flex;
-             flex-direction: column;
-             flex-wrap: wrap;
-             position: absolute;
-             top: 6em;
-             left: 9em;
+            top: -2em;
+            left: 14em;
          }
-
-
          .subcard4 {
-             width: 11em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             padding-left: 1em;
-             border-radius: 0.3em;
-             z-index: 1;
-             margin-bottom: 1em;
-             display: flex;
-             flex-direction: column;
-             flex-wrap: wrap;
-             position: absolute;
-             top: -0.5em;
-             left: 19em;
+            top: -2em;
+            left: 22em;
          }
-
          .subcard5 {
-             width: 9em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             padding-left: 1em;
-             border-radius: 0.3em;
-             z-index: 1;
-             margin-bottom: 1em;
-             display: flex;
-             flex-direction: column;
-             flex-wrap: wrap;
-             position: absolute;
-             top: 6em;
-             left: 19em;
+            top: -2em;
+            left: 30em; 
          }
-
          .subcard6 {
-             width: 13em;
-             height: 5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             padding-left: 1em;
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             flex-direction: column;
-             flex-wrap: wrap;
-             position: absolute;
-             top: 6em;
-             left: 29em;
+            top: -2em;
+            left: 38em;
+            height: 7em;
          }
-
          .subcard7 {
-             width: 13em;
-             height: 14em;
-             padding-top: 3em;
-             padding-bottom: 2.3em;
-             padding-left: 1em;
-             padding-right: 1em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             flex-direction: column;
-             flex-wrap: wrap;
              position: absolute;
              top: 1em;
+             width: 12em;
+             height: 12em;
+             padding-left: 1em;
+             left: 2em;
          }
 
          .subcard8 {
-             width: 13em;
-             height: 6em;
-             padding-left: 1em;
-             padding-right: 1em;
-             padding-bottom: 0.5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             align-items: flex-start;
-             justify-content: flex-end;
-             flex-direction: column;
-             flex-wrap: wrap;
              position: absolute;
-             top: 2.2em;
-         }
-
-         .subcard8funcionario {
+             top: 1em;
              width: 13em;
-             height: 6em;
+             height: 13em;
              padding-left: 1em;
-             padding-right: 1em;
-             padding-bottom: 0.5em;
-             margin: 0 auto;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             align-items: flex-start;
-             justify-content: flex-end;
-             flex-direction: column;
-             flex-wrap: wrap;
-             position: absolute;
-             top: 2.2em;
+             left: 15em;
          }
 
          .subcard9 {
-             width: 13em;
-             height: 6.2em;
-             padding-left: 1em;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             align-items: flex-start;
-             justify-content: flex-start;
-             flex-direction: column;
-             flex-wrap: wrap;
              position: absolute;
              top: 2em;
-             left: 16em;
+             width: 16em;
+             height: 7em;
+             padding-left: 1em;
+             left: 13.5em;
+         }
+
+         .subcard8funcionario {
+             position: absolute;
+             top: 3em;
+             width: 12em;
+             height: 6em;
+             padding-left: 1em;
+             left: 2em;
          }
 
          .subcard9funcionario {
-             width: 13em;
-             height: 6.2em;
-             padding-left: 1em;
-             background-color: #fff;
-             border: 1px solid var(--corContorno);
-             border-radius: 0.3em;
-             z-index: 1;
-             display: flex;
-             align-items: flex-start;
-             justify-content: flex-start;
-             flex-direction: column;
-             flex-wrap: wrap;
              position: absolute;
              top: 2em;
-             left: 16em;
-         }
-
-         .inputMeta {
-             max-width: 11em;
+             width: 16em;
+             height: 7em;
+             padding-left: 1em;
+             left: 17em;
          }
 
          .tools {
              display: flex;
-             align-items: flex-start;
-             justify-content: flex-start;
-             padding: 0.5em;
-         }
-
-         .tools2 {
-             display: flex;
              align-items: center;
-             justify-content: center;
-             padding: 0.5em;
-             flex-direction: column;
+             padding: 9px;
          }
 
          .circle {
-             padding: 0 0.3em 0 0;
+             padding: 0 4px;
          }
 
          .box {
              display: inline-block;
-             align-items: flex-start;
-             justify-content: flex-start;
+             align-items: center;
              width: 10px;
              height: 10px;
-             padding: 0.05em;
+             padding: 1px;
              border-radius: 50%;
          }
 
@@ -2684,7 +2550,7 @@
          }
 
          .card {
-             width: 50em;
+             width: 40em;
              height: 37em;
              margin-left: -14em;
              background-color: white;
@@ -2693,7 +2559,7 @@
              margin: 0 auto;
              position: absolute;
              top: 7em;
-             left: 0;
+             left: 2em;
          }
 
          .card1 {

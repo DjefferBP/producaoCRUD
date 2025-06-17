@@ -27,7 +27,7 @@
                 width: 0px;
                 margin: auto;
                 border-right: 2px solid transparent;
-                font-size: 220% !important;
+                font-size: 160% !important;
                 text-align: center;
                 white-space: nowrap;
                 justify-content: center;
@@ -38,6 +38,8 @@
                 animation: typewriter 4000ms steps(22) 100ms forwards,
                     /* aqui vc controlo o tempo do efeito escrita mais 1 steps(X) para cada caracter  */
                     blinkTextCursor 500ms steps(22) 22 backwards;
+                    position: relative;
+                    left: 75%;
                 /* aqui vc controlo o tempo da linha mais 1 steps(X) para cada caracter e ela repete 12x500ms = 6000ms */
             }
 
@@ -112,6 +114,14 @@
                     opacity: 0;
                     height: 0;
                 }
+            }
+        }
+        @media (min-width: 1728px) {
+            .line {
+                font-size: 220% !important;
+            }
+            .anim-typewriter {
+                left: 90%;
             }
         }
     </style>
